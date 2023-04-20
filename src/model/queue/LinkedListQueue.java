@@ -1,14 +1,14 @@
 package model.queue;
 
-public class LinkedListQueue {
-    public Node head = null;
-    public Node tail = null;
+public abstract class LinkedListQueue<T> {
+    public Node<T> head = null;
+    public Node<T> tail = null;
 
     public LinkedListQueue() {
     }
 
-    public void enQueue(int key) {
-        Node temp = new Node(key);
+    public void enQueue(T key) {
+        Node<T> temp = new Node(key);
         if (this.tail == null) {
             this.head = this.tail = temp;
             return;
@@ -17,11 +17,11 @@ public class LinkedListQueue {
         this.tail = temp;
     }
 
-    public Node deQueue() {
+    public Node<T> deQueue() {
         if (this.head == null) {
             return null;
         }
-        Node temp = this.head;
+        Node<T> temp = this.head;
         this.head = this.head.next;
         if (this.head == null) {
             this.tail = null;

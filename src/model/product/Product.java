@@ -1,5 +1,7 @@
 package model.product;
 
+import model.queue.ProductQueue;
+
 import java.time.LocalDate;
 
 public abstract class Product {
@@ -9,6 +11,8 @@ public abstract class Product {
     protected Double productOriginalPrice;
     protected Double productSellPrice;
     protected int productQuantity;
+
+
     protected LocalDate manufacturingDate;
 
 

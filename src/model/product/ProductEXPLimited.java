@@ -1,9 +1,13 @@
 package model.product;
 
+import model.queue.ProductQueue;
+
 import java.time.LocalDate;
 
 public class ProductEXPLimited extends Product{
     private int expiryPeriod;
+    protected ProductQueue productQueue = new ProductQueue();
+
 
     public ProductEXPLimited() {
     }
@@ -16,6 +20,10 @@ public class ProductEXPLimited extends Product{
     public boolean isExpired(){
        return getManufacturingDate().plusDays(expiryPeriod)
                .isAfter(LocalDate.now());
+    }
+
+    public ProductQueue getProductQueue() {
+        return productQueue;
     }
 
     @Override
