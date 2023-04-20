@@ -1,5 +1,7 @@
 -PHẦN MỀM [KẾ TOÁN / QUẢN LÝ BÁN HÀNG NHỎ LẺ]-
+
 I/ Ý tưởng/ Mục tiêu/ Chức năng:
+
 I.1/ Quản lý tài sản - Ưu tiên trước (do mục tiêu là quản lý bán hàng nhỏ lẻ)
 - Quản lý hàng tồn kho:
     + Xuất/Nhập kho;
@@ -9,6 +11,7 @@ I.1/ Quản lý tài sản - Ưu tiên trước (do mục tiêu là quản lý b
 - Quản lý tiền mặt:
 - Quản lý tiền gửi ngân hàng:
 - Nợ phải thu:
+- 
 I.2/ Quản lý nguồn vốn - Optional
 - Nguồn vốn đầu tư của chủ sở hữu:
 - Lợi nhuận chưa phân phối:
@@ -19,8 +22,14 @@ I.2/ Quản lý nguồn vốn - Optional
     + Phải trả nội bộ;
     + Người mua ứng trước tiền hàng;
     + Phải trả phải nộp khác;
+    + 
 I.3/ Báo cáo kết quả hoạt động kinh doanh:
+
 // Note: Tài sản = tổng nguồn vốn  = vốn chủ sở hữu + nợ phải trả 
   
 
 II/ Chi tiết:
+
+
+III/ Note:
+- Apache poi API : đọc/ghi file exel;
