@@ -8,7 +8,9 @@ public class Main {
 
         ProductManager productList = new ProductManager();
         Product p1 = new ProductEXPLimited();
+        p1.setProductId("111");
         Product p2 = new ProductEXPLimited();
+        p2.setProductId("222");
         Product p3 = new ProductEXPUnLimited();
         Product p4 = new ProductEXPUnLimited();
         Product p5 = new ProductEXPUnLimited();

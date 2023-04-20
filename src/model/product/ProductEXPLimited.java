@@ -1,28 +1,27 @@
 package model.product;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class ProductEXPLimited extends Product{
-    private int daysUntilExpiry;
+    private int expiryPeriod;
 
     public ProductEXPLimited() {
     }
 
-    public ProductEXPLimited(int daysUntilExpiry) {
-        this.daysUntilExpiry = daysUntilExpiry;
+    public ProductEXPLimited(int expiryPeriod) {
+        this.expiryPeriod = expiryPeriod;
     }
 
 
     public boolean isExpired(){
-       return getManufacturingDate().plusDays(daysUntilExpiry)
+       return getManufacturingDate().plusDays(expiryPeriod)
                .isAfter(LocalDate.now());
     }
 
     @Override
     public String toString() {
         return "ProductEXPLimited{" + super.toString() +
-                "daysUntilExpiry=" + daysUntilExpiry +
+                "daysUntilExpiry=" + expiryPeriod +
                 '}' + "\n";
     }
 }

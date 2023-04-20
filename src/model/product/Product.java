@@ -3,6 +3,7 @@ package model.product;
 import java.time.LocalDate;
 
 public abstract class Product {
+    private static int specialValue = 10_000;
     protected String productId;
     protected String productName;
     protected Double productOriginalPrice;
@@ -12,10 +13,12 @@ public abstract class Product {
 
 
     public Product() {
+        ++specialValue;
+        this.productId = "" + specialValue;
     }
 
     public Product(String productId, String productName, Double productOriginalPrice, Double productSellPrice, int productQuantity, LocalDate manufacturingDate) {
-        this.productId = productId;
+        this.productId = productId + specialValue;
         this.productName = productName;
         this.productOriginalPrice = productOriginalPrice;
         this.productSellPrice = productSellPrice;
