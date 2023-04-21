@@ -1,29 +1,29 @@
-package service.product;
+package manager.product;
 
 import model.product.Product;
 import model.product.ProductEXPLimited;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ProductManager implements IProductManager {
-    public List<Product> list = new ArrayList<>();
+    public List<Product> productList = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
     public ProductManager() {
     }
 
     public boolean isProductExisted(String key) {
-        return list
+        return productList
                 .stream()
                 .anyMatch(product -> product.getProductId().equals(key));
     }
 
+    public void updateQuantity(Product product){
+    }
 
     @Override
     public void add(Product product) {
-        list.add(product);
+        productList.add(product);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ProductManager implements IProductManager {
                     """);
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
-                case 1 -> list = list
+                case 1 -> productList = productList
                         .stream()
                         .filter(product -> product.getProductId().equals(productID))
                         .toList();
@@ -49,10 +49,10 @@ public class ProductManager implements IProductManager {
         }
     }
 
-    public Product findProductById(String productId) {
-            List<Product> tempProductList = list
+    public Product findProductByName(String productKeyName) {
+            List<Product> tempProductList = productList
                     .stream()
-                    .filter(product -> product.getProductId().equals(productId))
+                    .filter(product -> product.getProductName().equals(productKeyName))
                     .toList();
             return tempProductList.get(0);
     }
@@ -63,7 +63,7 @@ public class ProductManager implements IProductManager {
         System.out.println("Edit product by ID - Please Enter the Product ID: ");
         String productId = scanner.nextLine();
         if (isProductExisted(productId)) {
-            productToEdit = findProductById(productId);
+            productToEdit = findProductByName(productId);
             System.out.println("You are trying to edit this product" + productToEdit);
             System.out.println("Enter the new name");
             String name = scanner.nextLine();
@@ -86,6 +86,6 @@ public class ProductManager implements IProductManager {
     @Override
     public void display() {
         System.out.println("List of the Products");
-        System.out.println(list);
+        System.out.println(productList);
     }
 }

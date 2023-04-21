@@ -1,4 +1,4 @@
-package service;
+package manager;
 
 public interface IGeneralManager<T> {
     void add(T type);

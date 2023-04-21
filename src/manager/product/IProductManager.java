@@ -1,7 +1,7 @@
-package service.product;
+package manager.product;
 
 import model.product.Product;
-import service.IGeneralManager;
+import manager.IGeneralManager;
 
 public interface IProductManager extends IGeneralManager<Product> {
     void sortProductByPrice();

@@ -6,8 +6,6 @@ import java.time.LocalDate;
 
 public class ProductEXPLimited extends Product{
     private int expiryPeriod;
-    protected ProductQueue productQueue = new ProductQueue();
-
 
     public ProductEXPLimited() {
     }
@@ -22,9 +20,7 @@ public class ProductEXPLimited extends Product{
                .isAfter(LocalDate.now());
     }
 
-    public ProductQueue getProductQueue() {
-        return productQueue;
-    }
+
 
     @Override
     public String toString() {

@@ -3,30 +3,36 @@ package model.product;
 import model.queue.ProductQueue;
 
 import java.time.LocalDate;
+import java.util.PriorityQueue;
 
 public abstract class Product {
-    private static int specialValue = 10_000;
+    private static int hiddenSpecialValue = 10_000;
     protected String productId;
     protected String productName;
+    protected String productDetail;
     protected Double productOriginalPrice;
     protected Double productSellPrice;
-    protected int productQuantity;
-
+//    protected int productQuantity;
+//    protected PriorityQueue<Product> productQueue = new PriorityQueue<>();
 
     protected LocalDate manufacturingDate;
 
 
     public Product() {
-        ++specialValue;
-        this.productId = "" + specialValue;
+        ++hiddenSpecialValue;
+        this.productId = "" + hiddenSpecialValue;
     }
 
-    public Product(String productId, String productName, Double productOriginalPrice, Double productSellPrice, int productQuantity, LocalDate manufacturingDate) {
-        this.productId = productId + specialValue;
+    public Product(String productId, String productName, String productDetail, Double productOriginalPrice, Double productSellPrice, int productQuantity, LocalDate manufacturingDate) {
+        this.productId = productId;
         this.productName = productName;
+        this.productDetail = productDetail;
         this.productOriginalPrice = productOriginalPrice;
         this.productSellPrice = productSellPrice;
-        this.productQuantity = productQuantity;
+//        this.productQuantity = productQuantity;
+//        for(int i =0; i< productQuantity;i++) {
+//            this.productQueue.poll();
+//        }
         this.manufacturingDate = manufacturingDate;
     }
 
@@ -62,13 +68,14 @@ public abstract class Product {
         this.productSellPrice = productSellPrice;
     }
 
-    public int getProductQuantity() {
-        return productQuantity;
-    }
-
-    public void setProductQuantity(int productQuantity) {
-        this.productQuantity = productQuantity;
-    }
+//    public int getProductQuantity() {
+//        this.productQuantity = this.productQueue.size();
+//        return productQuantity;
+//    }
+//
+//    public void setProductQuantity(int productQuantity) {
+//        this.productQuantity = productQuantity;
+//    }
 
     public LocalDate getManufacturingDate() {
         return manufacturingDate;
@@ -78,13 +85,24 @@ public abstract class Product {
         this.manufacturingDate = manufacturingDate;
     }
 
+    public String getProductDetail() {
+        return productDetail;
+    }
+
+    public void setProductDetail(String productDetail) {
+        this.productDetail = productDetail;
+    }
+
+//    public PriorityQueue<Product> getProductQueue() {
+//        return productQueue;
+//    }
     @Override
     public String toString() {
         return "productId='" + productId + '\'' +
                 ", productName='" + productName + '\'' +
                 ", productOriginalPrice=" + productOriginalPrice +
                 ", productSellPrice=" + productSellPrice +
-                ", productQuantity=" + productQuantity +
+//                ", productQuantity=" + productQuantity +
                 ", manufacturingDate=" + manufacturingDate;
     }
 }

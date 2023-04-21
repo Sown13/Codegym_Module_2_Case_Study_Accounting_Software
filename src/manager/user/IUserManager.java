@@ -1,7 +1,7 @@
-package service.user;
+package manager.user;
 
 import model.user.User;
-import service.IGeneralManager;
+import manager.IGeneralManager;
 
 public interface IUserManager extends IGeneralManager<User> {
 

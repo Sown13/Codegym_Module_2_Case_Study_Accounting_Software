@@ -1,7 +1,7 @@
 import model.product.Product;
 import model.product.ProductEXPLimited;
 import model.product.ProductEXPUnLimited;
-import service.product.ProductManager;
+import manager.product.ProductManager;
 
 public class Main {
     public static void main(String[] args) {
