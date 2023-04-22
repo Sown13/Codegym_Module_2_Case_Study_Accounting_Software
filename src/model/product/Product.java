@@ -98,10 +98,11 @@ public abstract class Product {
 //    }
     @Override
     public String toString() {
-        return "productId='" + productId + '\'' +
-                ", productName='" + productName + '\'' +
-                ", productOriginalPrice=" + productOriginalPrice +
-                ", productSellPrice=" + productSellPrice ;
+        return "productId: '" + productId + '\'' +
+                ", productName: '" + productName + '\'' +
+                ", productOriginalPrice: " + productOriginalPrice +
+                ", productSellPrice: " + productSellPrice +
+                ", productDetail: " + productDetail;
 //              +  ", productQuantity=" + productQuantity +
 //                ", manufacturingDate=" + manufacturingDate;
     }

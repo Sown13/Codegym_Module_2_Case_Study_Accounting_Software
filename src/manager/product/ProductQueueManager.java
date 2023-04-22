@@ -11,6 +11,9 @@ public class ProductQueueManager implements IGeneralManager<ProductQueue> {
     List<ProductQueue> productQueueList = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
+    public ProductQueueManager() {
+    }
+
     @Override
     public void add(ProductQueue productQueue) {
         if (productQueueList.isEmpty()) {
