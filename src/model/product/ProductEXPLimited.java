@@ -1,31 +1,31 @@
 package model.product;
 
-import model.queue.ProductQueue;
 
 import java.time.LocalDate;
 
 public class ProductEXPLimited extends Product{
     private int expiryPeriod;
 
-    public ProductEXPLimited() {
+    public ProductEXPLimited(String name) {
+        super(name);
     }
 
-    public ProductEXPLimited(int expiryPeriod) {
-        this.expiryPeriod = expiryPeriod;
-    }
+//    public ProductEXPLimited(int expiryPeriod) {
+//        this.expiryPeriod = expiryPeriod;
+//    }
 
 
-    public boolean isExpired(){
-       return getManufacturingDate().plusDays(expiryPeriod)
-               .isAfter(LocalDate.now());
-    }
-
+//    public boolean isExpired(){
+//       return getManufacturingDate().plusDays(expiryPeriod)
+//               .isAfter(LocalDate.now());
+//    }
+//
 
 
     @Override
     public String toString() {
-        return "ProductEXPLimited{" + super.toString() +
-                "daysUntilExpiry=" + expiryPeriod +
+        return "ProductEXPLimited{" + super.toString() + "," +
+                " daysUntilExpiry=" + expiryPeriod +
                 '}' + "\n";
     }
 }

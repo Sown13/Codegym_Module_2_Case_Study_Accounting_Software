@@ -1,6 +1,5 @@
 package model.product;
 
-import model.queue.ProductQueue;
 
 import java.time.LocalDate;
 import java.util.PriorityQueue;
@@ -15,12 +14,13 @@ public abstract class Product {
 //    protected int productQuantity;
 //    protected PriorityQueue<Product> productQueue = new PriorityQueue<>();
 
-    protected LocalDate manufacturingDate;
+//    protected LocalDate manufacturingDate;
 
 
-    public Product() {
+    public Product(String productName) {
         ++hiddenSpecialValue;
         this.productId = "" + hiddenSpecialValue;
+        this.productName = productName;
     }
 
     public Product(String productId, String productName, String productDetail, Double productOriginalPrice, Double productSellPrice, int productQuantity, LocalDate manufacturingDate) {
@@ -33,7 +33,7 @@ public abstract class Product {
 //        for(int i =0; i< productQuantity;i++) {
 //            this.productQueue.poll();
 //        }
-        this.manufacturingDate = manufacturingDate;
+//        this.manufacturingDate = manufacturingDate;
     }
 
     public String getProductId() {
@@ -77,13 +77,13 @@ public abstract class Product {
 //        this.productQuantity = productQuantity;
 //    }
 
-    public LocalDate getManufacturingDate() {
-        return manufacturingDate;
-    }
-
-    public void setManufacturingDate(LocalDate manufacturingDate) {
-        this.manufacturingDate = manufacturingDate;
-    }
+//    public LocalDate getManufacturingDate() {
+//        return manufacturingDate;
+//    }
+//
+//    public void setManufacturingDate(LocalDate manufacturingDate) {
+//        this.manufacturingDate = manufacturingDate;
+//    }
 
     public String getProductDetail() {
         return productDetail;
@@ -101,8 +101,8 @@ public abstract class Product {
         return "productId='" + productId + '\'' +
                 ", productName='" + productName + '\'' +
                 ", productOriginalPrice=" + productOriginalPrice +
-                ", productSellPrice=" + productSellPrice +
-//                ", productQuantity=" + productQuantity +
-                ", manufacturingDate=" + manufacturingDate;
+                ", productSellPrice=" + productSellPrice ;
+//              +  ", productQuantity=" + productQuantity +
+//                ", manufacturingDate=" + manufacturingDate;
     }
 }
