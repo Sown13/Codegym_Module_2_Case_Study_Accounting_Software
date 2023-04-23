@@ -24,6 +24,7 @@ I.2/ Quản lý nguồn vốn - Optional
     + Phải trả phải nộp khác;
     + 
 I.3/ Báo cáo kết quả hoạt động kinh doanh:
+- Kết chuyển 911 (911a - 911b)
 
 // Note: Tài sản = tổng nguồn vốn  = vốn chủ sở hữu + nợ phải trả 
   
