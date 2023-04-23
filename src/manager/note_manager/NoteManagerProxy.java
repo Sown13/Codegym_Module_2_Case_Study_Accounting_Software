@@ -16,24 +16,24 @@ public class NoteManagerProxy extends User implements INoteManager {
     @Override
     public void add(Note note) {
         switch (this.role){
-            case ADMIN,ACCOUNTANT,STOREKEEPER -> realNoteManager.add(note);
-            case SALE_STAFF -> System.out.println("Unauthorized");
+            case ADMIN,SALE_STAFF,STOREKEEPER -> realNoteManager.add(note);
+            case ACCOUNTANT -> System.out.println("Unauthorized");
         }
     }
 
     @Override
     public void remove() {
         switch (this.role){
-            case ADMIN,ACCOUNTANT,STOREKEEPER -> realNoteManager.remove();
-            case SALE_STAFF -> System.out.println("Unauthorized");
+            case ADMIN,STOREKEEPER -> realNoteManager.remove();
+            case SALE_STAFF,ACCOUNTANT -> System.out.println("Unauthorized");
         }
     }
 
     @Override
     public void edit() {
         switch (this.role) {
-            case ADMIN,ACCOUNTANT,STOREKEEPER -> realNoteManager.edit();
-            case SALE_STAFF -> System.out.println("Unauthorized");
+            case ADMIN, STOREKEEPER -> realNoteManager.edit();
+            case SALE_STAFF,ACCOUNTANT -> System.out.println("Unauthorized");
         }
     }
 
@@ -63,18 +63,7 @@ public class NoteManagerProxy extends User implements INoteManager {
 
     @Override
     public List<Note> getDeliveryNote() {
-        switch (this.role) {
-            case ADMIN,ACCOUNTANT,STOREKEEPER -> {
-                return realNoteManager.getDeliveryNote();
-            }
-            case SALE_STAFF -> {
-                System.out.println("Unauthorized");
-                return null;
-            }
-            default -> {
-                return null;
-            }
-        }
+        return realNoteManager.getDeliveryNote();
     }
 
     @Override
