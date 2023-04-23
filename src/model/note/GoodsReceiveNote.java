@@ -32,6 +32,12 @@ public class GoodsReceiveNote extends Note {
         } else {
             tempProduct = productFactory.makeProduct("unlimited", productName);
         }
+        System.out.println("Enter the original price");
+        double originalPrice = Double.parseDouble(scanner.nextLine());
+        tempProduct.setProductOriginalPrice(originalPrice);
+        System.out.println("Enter the sell price");
+        double sellPrice = Double.parseDouble(scanner.nextLine());
+        tempProduct.setProductSellPrice(sellPrice);
         productQueueList.add(new ProductQueue(quantity,tempProduct));
         NoteManager noteManager = new NoteManager();
         this.totalAmount = tempProduct.getProductOriginalPrice() * quantity;

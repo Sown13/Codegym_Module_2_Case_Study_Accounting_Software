@@ -11,6 +11,7 @@ import model.product.Product;
 public class GoodsDeliveryNote extends Note {
     private static int specialNoteValue = 10_000;
     private Product productDelivery;
+    private double totalExpense;
 
     public GoodsDeliveryNote(String productName, int quantity) {
         super(productName, quantity);
@@ -20,6 +21,7 @@ public class GoodsDeliveryNote extends Note {
             if (productQueue.getProductQueueName().equals(productName)) {
                 this.productDelivery = productQueue.getRepresentationProduct();
                 this.totalAmount = productQueue.decreaseQuantity(quantity);
+                this.totalExpense = productQueue.getTotalOriginalPrice();
                 break;
             }
         }
@@ -29,5 +31,9 @@ public class GoodsDeliveryNote extends Note {
 
     public Product getProductDelivery() {
         return productDelivery;
+    }
+
+    public double getTotalExpense() {
+        return totalExpense;
     }
 }

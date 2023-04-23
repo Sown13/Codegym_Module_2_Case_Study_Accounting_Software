@@ -13,9 +13,9 @@ public class UserManager implements IUserManager {
     private static final Map<String, User > userList = new HashMap<>();
     static Scanner scanner = new Scanner(System.in);
 
-    private UserManager() {
-        userList.put("admin", Admin.getAdmin());
-    }
+//    private UserManager() {
+//        userList.put("admin", Admin.getAdmin());
+//    }
     public static UserManager getUserManager(){
         return userManager;
     }

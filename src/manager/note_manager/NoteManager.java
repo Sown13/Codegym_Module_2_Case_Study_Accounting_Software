@@ -102,4 +102,7 @@ public class NoteManager implements INoteManager{
         // Need a write method to save old note list to file and read it later
         noteList.clear();
     }
+    public List<Note> getNoteList(){
+        return noteList;
+    }
 }

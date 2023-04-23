@@ -6,6 +6,8 @@ import manager.queue.ProductQueueManagerProxy;
 
 public class Admin extends User{
     private static final Admin admin = new Admin();
+    private static double money;
+    private static double capital;
     private Admin() {
         this.userName = "admin";
         this.password = "admin";
@@ -18,4 +20,19 @@ public class Admin extends User{
         return admin;
     }
 
+    public static double getMoney() {
+        return money;
+    }
+
+    public static void setMoney(double money) {
+        Admin.money = money;
+    }
+
+    public static double getCapital() {
+        return capital;
+    }
+
+    public static void setCapital(double capital) {
+        Admin.capital = capital;
+    }
 }
