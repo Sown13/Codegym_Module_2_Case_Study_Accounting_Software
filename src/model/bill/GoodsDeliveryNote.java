@@ -2,8 +2,8 @@ package model.bill;
 
 //import model.product.ProductFactory;
 
-import manager.product.ProductQueue;
-import manager.product.ProductQueueManager;
+import manager.queue.ProductQueue;
+import manager.queue.ProductQueueManager;
 import model.product.Product;
 
 //Phiếu xuất kho, sẽ cần lưu lại sau mỗi lần lập;

@@ -1,5 +1,7 @@
 package manager.note_manager;
 
+import model.bill.GoodsDeliveryNote;
+import model.bill.GoodsReceiveNote;
 import model.bill.Note;
 
 import java.util.ArrayList;
@@ -7,8 +9,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class NoteManager implements INoteManager{
-    static List<Note> noteList = new ArrayList<>();
+    private static List<Note> noteList = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
+
 
     @Override
     public void add(Note note) {
@@ -29,16 +32,13 @@ public class NoteManager implements INoteManager{
                     0/ No, Cancel it!
                     """);
             String choice = scanner.nextLine();
-            switch (choice){
-                case "1" -> {
-                    noteList = noteList
-                            .stream()
-                            .filter(note -> !note.getNoteId().equals(noteId))
-                            .toList();
-                }
-                default -> {
-                    System.out.println("Canceled");
-                }
+            if (choice.equals("1")) {
+                noteList = noteList
+                        .stream()
+                        .filter(note -> !note.getNoteId().equals(noteId))
+                        .toList();
+            } else {
+                System.out.println("Canceled");
             }
         }
     }
@@ -58,19 +58,16 @@ public class NoteManager implements INoteManager{
                     0/ No, Cancel it!
                     """);
             String choice = scanner.nextLine();
-            switch (choice){
-                case "1" -> {
-                    System.out.println("Enter the new product name");
-                    String productName = scanner.nextLine();
-                    System.out.println("Enter the new quantity");
-                    int quantity = Integer.parseInt(scanner.nextLine());
-                    noteEdit.setProductName(productName);
-                    noteEdit.setQuantity(quantity);
-                    System.out.println("Edit successful");
-                }
-                default -> {
-                    System.out.println("Canceled");
-                }
+            if (choice.equals("1")) {
+                System.out.println("Enter the new product name");
+                String productName = scanner.nextLine();
+                System.out.println("Enter the new quantity");
+                int quantity = Integer.parseInt(scanner.nextLine());
+                noteEdit.setProductName(productName);
+                noteEdit.setQuantity(quantity);
+                System.out.println("Edit successful");
+            } else {
+                System.out.println("Canceled");
             }
         }
     }
@@ -81,5 +78,28 @@ public class NoteManager implements INoteManager{
         for (Note note : noteList){
             System.out.println(++order + " - " + note);
         }
+    }
+    @Override
+    public List<Note> getReceiveNote(){
+        List<Note> receiveNoteList = noteList
+                .stream()
+                .filter(note -> note instanceof GoodsReceiveNote)
+                .toList();
+        System.out.println(receiveNoteList);
+        return receiveNoteList;
+    }
+    @Override
+    public List<Note> getDeliveryNote(){
+        List<Note> deliveryNoteList = noteList
+                .stream()
+                .filter(note -> note instanceof GoodsDeliveryNote)
+                .toList();
+        System.out.println(deliveryNoteList);
+        return deliveryNoteList;
+    }
+    @Override
+    public void resetNote(){
+        // Need a write method to save old note list to file and read it later
+        noteList.clear();
     }
 }

@@ -1,13 +1,12 @@
-package manager.product;
+package manager.queue;
 
-import manager.IGeneralManager;
 import model.sout.NotifyForm;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ProductQueueManager implements IGeneralManager<ProductQueue> {
+public class ProductQueueManager implements IProductQueueManager {
     private static List<ProductQueue> productQueueList = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
@@ -75,17 +74,16 @@ public class ProductQueueManager implements IGeneralManager<ProductQueue> {
                     0/ No, Cancel it!
                     """);
             int choice = Integer.parseInt(scanner.nextLine());
-            switch (choice) {
-                case 1 -> {
-                    NotifyForm.textNoteEditByName();
-                    String name = scanner.nextLine();
-                    String description = scanner.nextLine();
-                    double sellPrice = Double.parseDouble(scanner.nextLine());
-                    productQueueToEdit.setProductName(name);
-                    productQueueToEdit.setProductDetail(description);
-                    productQueueToEdit.setSellPrice(sellPrice);
-                }
-                default -> System.out.println("Canceled!");
+            if (choice == 1) {
+                NotifyForm.textNoteEditByName();
+                String name = scanner.nextLine();
+                String description = scanner.nextLine();
+                double sellPrice = Double.parseDouble(scanner.nextLine());
+                productQueueToEdit.setProductName(name);
+                productQueueToEdit.setProductDetail(description);
+                productQueueToEdit.setSellPrice(sellPrice);
+            } else {
+                System.out.println("Canceled!");
             }
         } else {
             System.out.println("Product not found!");
@@ -107,4 +105,17 @@ public class ProductQueueManager implements IGeneralManager<ProductQueue> {
     public static List<ProductQueue> getProductQueueList() {
         return productQueueList;
     }
+    @Override
+    public void searchProduct(){
+        System.out.println("Enter the key word");
+        String keyword = scanner.nextLine();
+        List<ProductQueue> searchResult = productQueueList
+                .stream()
+                .filter(productQueue -> productQueue.getProductQueueName().contains(keyword) ||
+                        productQueue.getRepresentationProduct().getProductId().contains(keyword) ||
+                        productQueue.getRepresentationProduct().getProductDetail().contains(keyword))
+                .toList();
+        System.out.println(searchResult);
+    }
+
 }

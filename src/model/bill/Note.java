@@ -1,9 +1,5 @@
 package model.bill;
 
-import manager.product.ProductQueue;
-import manager.product.ProductQueueManager;
-import model.product.Product;
-
 public abstract class Note {
     protected String noteId;
     protected String userNameCreateNote;

@@ -1,11 +1,18 @@
 package model.user;
 
+import manager.note_manager.NoteManagerProxy;
+import manager.queue.ProductQueueManagerProxy;
+
+
 public abstract class User {
     protected String userName;
     protected String password;
     protected String userFullName;
     protected String phoneNumber;
     protected Role role;
+
+    protected NoteManagerProxy noteManagerProxy;
+    protected ProductQueueManagerProxy productQueueManagerProxy;
 
     public String getUserName() {
         return userName;
@@ -46,4 +53,7 @@ public abstract class User {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+
+
 }

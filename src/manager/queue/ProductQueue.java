@@ -1,4 +1,4 @@
-package manager.product;
+package manager.queue;
 
 import model.product.Product;
 

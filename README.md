@@ -1,4 +1,4 @@
--PHẦN MỀM [KẾ TOÁN / QUẢN LÝ BÁN HÀNG NHỎ LẺ]-
+-PHẦN MỀM [KẾ TOÁN / QUẢN LÝ BÁN HÀNG - Nhỏ lẻ > Tạp hóa > Siêu thị > Doanh nghiệp lớn]-
 
 I/ Ý tưởng/ Mục tiêu/ Chức năng:
 

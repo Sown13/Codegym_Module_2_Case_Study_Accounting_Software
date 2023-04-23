@@ -1,5 +1,5 @@
-import manager.product.ProductQueue;
-import manager.product.ProductQueueManager;
+import manager.queue.ProductQueue;
+import manager.queue.ProductQueueManager;
 import manager.user.UserManager;
 import model.bill.GoodsDeliveryNote;
 import model.bill.GoodsReceiveNote;

@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class UserManager implements IUserManager {
     private static final UserManager userManager = new UserManager();
-    private final Map<String, User > userList = new HashMap<>();
+    private static final Map<String, User > userList = new HashMap<>();
     static Scanner scanner = new Scanner(System.in);
 
     private UserManager() {
