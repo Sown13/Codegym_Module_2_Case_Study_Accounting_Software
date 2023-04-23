@@ -1,8 +1,11 @@
 import manager.product.ProductQueue;
 import manager.product.ProductQueueManager;
+import manager.user.UserManager;
 import model.product.Product;
 import model.product.ProductEXPLimited;
 import model.product.ProductEXPUnLimited;
+import model.user.User;
+import model.user.UserFactory;
 
 public class Main {
     public static void main(String[] args) {
@@ -30,9 +33,12 @@ public class Main {
         list.add(q5);
         list.add(q1);
         list.add(q1);
-        list.display();
-        list.edit();
-        list.display();
-
+//        list.display();
+//        list.edit();
+//        list.display();
+        UserFactory userFactory = new UserFactory();
+        User user1 = userFactory.createUser("Accountant","son","123","nguyen hai son");
+        UserManager.getUserManager().add(user1);
+        UserManager.getUserManager().display();
     }
 }

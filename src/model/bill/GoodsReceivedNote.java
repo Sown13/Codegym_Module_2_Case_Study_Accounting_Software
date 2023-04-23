@@ -1,4 +1,4 @@
-package controller.bill;
+package model.bill;
 
 import model.product.Product;
 
