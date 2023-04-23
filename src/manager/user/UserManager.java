@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 
 public class UserManager implements IUserManager {
-    private static UserManager userManager = new UserManager();
+    private static final UserManager userManager = new UserManager();
     private final Map<String, User > userList = new HashMap<>();
     static Scanner scanner = new Scanner(System.in);
 
@@ -80,7 +80,8 @@ public class UserManager implements IUserManager {
            if(!entry.getKey().equals("admin")){
                System.out.println("UserName: " + entry.getValue().getUserName() +
                        ",User Full Name : " + entry.getValue().getUserFullName() +
-                       ",User Phone Number : " + entry.getValue().getPhoneNumber());
+                       ",User Phone Number : " + entry.getValue().getPhoneNumber() +
+                       ", User Role: " + entry.getValue().getRole());
            }
        }
     }

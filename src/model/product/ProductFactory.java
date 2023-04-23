@@ -4,9 +4,7 @@ import java.util.Scanner;
 
 public class ProductFactory {
     static Scanner scanner = new Scanner(System.in);
-    public Product makeProduct(String choice){
-        System.out.println("Please enter the product name: ");
-        String name = scanner.nextLine();
+    public Product makeProduct(String choice, String name){
        switch (choice){
            case "limited" -> {
                return new ProductEXPLimited(name);

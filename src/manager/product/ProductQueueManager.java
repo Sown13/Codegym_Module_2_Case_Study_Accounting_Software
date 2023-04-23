@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ProductQueueManager implements IGeneralManager<ProductQueue> {
-    List<ProductQueue> productQueueList = new ArrayList<>();
+    private static List<ProductQueue> productQueueList = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
     public ProductQueueManager() {
@@ -85,7 +85,7 @@ public class ProductQueueManager implements IGeneralManager<ProductQueue> {
                     productQueueToEdit.setProductDetail(description);
                     productQueueToEdit.setSellPrice(sellPrice);
                 }
-                case 0 -> System.out.println("Canceled!");
+                default -> System.out.println("Canceled!");
             }
         } else {
             System.out.println("Product not found!");
@@ -104,4 +104,7 @@ public class ProductQueueManager implements IGeneralManager<ProductQueue> {
         }
     }
 
+    public static List<ProductQueue> getProductQueueList() {
+        return productQueueList;
+    }
 }
