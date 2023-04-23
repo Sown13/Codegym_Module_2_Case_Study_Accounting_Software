@@ -1,6 +1,6 @@
 package manager.note_manager;
 
-import model.bill.Note;
+import model.note.Note;
 import model.user.Role;
 import model.user.User;
 

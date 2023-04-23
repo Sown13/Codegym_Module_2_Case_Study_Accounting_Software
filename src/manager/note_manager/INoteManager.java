@@ -1,7 +1,7 @@
 package manager.note_manager;
 
 import manager.IGeneralManager;
-import model.bill.Note;
+import model.note.Note;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package manager.note_manager;
 
-import model.bill.GoodsDeliveryNote;
-import model.bill.GoodsReceiveNote;
-import model.bill.Note;
+import model.note.GoodsDeliveryNote;
+import model.note.GoodsReceiveNote;
+import model.note.Note;
 
 import java.util.ArrayList;
 import java.util.List;

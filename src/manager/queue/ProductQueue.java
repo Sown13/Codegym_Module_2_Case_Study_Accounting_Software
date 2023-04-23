@@ -23,18 +23,28 @@ public class ProductQueue {
         updateStorageStatus();
     }
 
-    public void increaseQuantity(int quantity, Product product) {
+    public double increaseQuantity(int quantity, Product product) {
+        double totalOriginalPrice = product.getProductOriginalPrice() * quantity;
         for (int i = 0; i < quantity; i++) {
             productQueue.addFirst(product);
         }
         updateStorageStatus();
+        return totalOriginalPrice;
     }
 
-    public void decreaseQuantity(int quantity) {
-        for (int i = 0; i < quantity; i++) {
-            productQueue.poll();
+    public double decreaseQuantity(int quantity) {
+        double totalSellPrice = 0;
+        if (quantity > productQueue.size()) {
+            System.out.println("Not enough quantity");
+            return totalSellPrice;
+        } else {
+            for (int i = 0; i < quantity; i++) {
+                Product tempProduct = productQueue.poll();
+                totalSellPrice += tempProduct.getProductSellPrice();
+            }
+            updateStorageStatus();
         }
-        updateStorageStatus();
+        return totalSellPrice;
     }
 
     public String getProductQueueName() {
@@ -45,20 +55,22 @@ public class ProductQueue {
         return quantity;
     }
 
-    public void setSellPrice(double sellPrice){
-        for(Product product : productQueue){
+    public void setSellPrice(double sellPrice) {
+        for (Product product : productQueue) {
             product.setProductSellPrice(sellPrice);
         }
         this.representationProduct.setProductSellPrice(sellPrice);
     }
-    public void setProductName(String name){
-        for (Product product : productQueue){
+
+    public void setProductName(String name) {
+        for (Product product : productQueue) {
             product.setProductName(name);
         }
         this.representationProduct.setProductName(name);
     }
-    public void setProductDetail(String detail){
-        for (Product product : productQueue){
+
+    public void setProductDetail(String detail) {
+        for (Product product : productQueue) {
             product.setProductDetail(detail);
         }
         this.representationProduct.setProductDetail(detail);

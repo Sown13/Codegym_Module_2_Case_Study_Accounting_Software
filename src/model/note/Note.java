@@ -1,4 +1,4 @@
-package model.bill;
+package model.note;
 
 public abstract class Note {
     protected String noteId;
@@ -6,16 +6,13 @@ public abstract class Note {
     protected String reason;
     protected String productName;
     protected int quantity;
-    protected double price;
+    protected double totalAmount;
 
     public Note() {
     }
     public Note(String productName, int quantity){
         this.productName = productName;
         this.quantity = quantity;
-    }
-    public double getTotalMoney(){
-        return this.quantity * this.price;
     }
 
     public String getNoteId() {
@@ -59,11 +56,8 @@ public abstract class Note {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
-        return price;
-    }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public double getTotalAmount() {
+        return totalAmount;
     }
 }

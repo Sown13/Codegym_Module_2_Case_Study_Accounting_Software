@@ -1,5 +1,6 @@
-package model.bill;
+package model.note;
 
+import manager.note_manager.NoteManager;
 import manager.queue.ProductQueue;
 import manager.queue.ProductQueueManager;
 import model.product.Product;
@@ -32,5 +33,8 @@ public class GoodsReceiveNote extends Note {
             tempProduct = productFactory.makeProduct("unlimited", productName);
         }
         productQueueList.add(new ProductQueue(quantity,tempProduct));
+        NoteManager noteManager = new NoteManager();
+        this.totalAmount = tempProduct.getProductOriginalPrice() * quantity;
+        noteManager.add(this);
     }
 }

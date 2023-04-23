@@ -1,9 +1,9 @@
 import manager.queue.ProductQueue;
 import manager.queue.ProductQueueManager;
 import manager.user.UserManager;
-import model.bill.GoodsDeliveryNote;
-import model.bill.GoodsReceiveNote;
-import model.bill.Note;
+import model.note.GoodsDeliveryNote;
+import model.note.GoodsReceiveNote;
+import model.note.Note;
 import model.product.Product;
 import model.product.ProductEXPLimited;
 import model.product.ProductEXPUnLimited;

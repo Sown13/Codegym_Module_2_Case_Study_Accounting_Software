@@ -1,4 +1,4 @@
-package model.bill;
+package model.note;
 
 import java.util.Scanner;
 
