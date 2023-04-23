@@ -93,6 +93,14 @@ public class ProductQueue {
         this.quantity = productQueue.size();
     }
 
+    public double getTotalOriginalPrice(){
+        double totalOriginalPrice = 0;
+        for (Product product : productQueue){
+            totalOriginalPrice += product.getProductOriginalPrice();
+        }
+        return totalOriginalPrice;
+    }
+
     @Override
     public String toString() {
         return representationProduct

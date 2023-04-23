@@ -118,4 +118,12 @@ public class ProductQueueManager implements IProductQueueManager {
         System.out.println(searchResult);
     }
 
+    public double getTotalCurrentOriginalPrice(){
+        double totalCurrentOriginalPrice = 0;
+        for(ProductQueue productQueue : productQueueList){
+            totalCurrentOriginalPrice += productQueue.getTotalOriginalPrice();
+        }
+        return totalCurrentOriginalPrice;
+    }
+
 }
