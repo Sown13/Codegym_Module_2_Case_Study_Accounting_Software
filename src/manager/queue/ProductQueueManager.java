@@ -1,8 +1,11 @@
 package manager.queue;
 
+import model.product.ProductEXPLimited;
+import model.product.ProductEXPUnLimited;
 import model.sout.NotifyForm;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -125,5 +128,23 @@ public class ProductQueueManager implements IProductQueueManager {
         }
         return totalCurrentOriginalPrice;
     }
+    public List<ProductQueue> getEXPUnlimitedList(){
+        List<ProductQueue> expUnlimitedList = productQueueList
+                .stream()
+                .filter(productQueue -> productQueue.getRepresentationProduct() instanceof ProductEXPUnLimited)
+                .toList();
+        return expUnlimitedList;
+    }
+    public List<ProductQueue> getExpLimitedList(){
+        List<ProductQueue> expLimitedList = productQueueList
+                .stream()
+                .filter(productQueue -> productQueue.getRepresentationProduct() instanceof ProductEXPLimited)
+                .toList();
+        return expLimitedList;
+    }
 
+    public void sortByName(){
+        productQueueList.sort(Comparator.comparing(ProductQueue::getProductQueueName));
+        display();
+    }
 }

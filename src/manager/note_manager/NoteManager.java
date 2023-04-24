@@ -5,6 +5,7 @@ import model.note.GoodsReceiveNote;
 import model.note.Note;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -104,5 +105,22 @@ public class NoteManager implements INoteManager{
     }
     public List<Note> getNoteList(){
         return noteList;
+    }
+    public void sortNoteList(){
+        noteList.sort(Comparator.comparing(Note::getNoteId));
+    }
+    public void findNote(){
+        System.out.println("Enter keyword");
+        String keyWord = scanner.nextLine();
+        List<Note> resultList = noteList
+                .stream()
+                .filter(note -> note.getProductName().contains(keyWord)||
+                        note.getNoteId().contains(keyWord))
+                .toList();
+        resultList.sort(Comparator.comparing(Note::getNoteId));
+        int order = 0;
+        for (Note note : resultList){
+            System.out.println(++order + " - " + note);
+        }
     }
 }

@@ -2,6 +2,8 @@ package manager.queue;
 
 import model.user.Role;
 
+import java.util.List;
+
 public class ProductQueueManagerProxy implements IProductQueueManager{
     private final Role role;
     private final ProductQueueManager realProductQueueManager = new ProductQueueManager();
@@ -42,4 +44,6 @@ public class ProductQueueManagerProxy implements IProductQueueManager{
     public void searchProduct() {
         realProductQueueManager.searchProduct();
     }
+
+
 }

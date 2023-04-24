@@ -36,4 +36,18 @@ public class GoodsDeliveryNote extends Note {
     public double getTotalExpense() {
         return totalExpense;
     }
+
+    @Override
+    public String toString() {
+        return "GoodsDeliveryNote{" +
+                "productDelivery=" + productDelivery +
+                ", totalExpense=" + totalExpense +
+                ", noteId='" + noteId + '\'' +
+                ", userNameCreateNote='" + userNameCreateNote + '\'' +
+                ", reason='" + reason + '\'' +
+                ", productName='" + productName + '\'' +
+                ", quantity=" + quantity +
+                ", totalAmount=" + totalAmount +
+                '}'+ "\n";
+    }
 }

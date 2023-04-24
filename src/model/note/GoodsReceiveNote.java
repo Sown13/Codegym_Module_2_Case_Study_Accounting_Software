@@ -43,4 +43,19 @@ public class GoodsReceiveNote extends Note {
         this.totalAmount = tempProduct.getProductOriginalPrice() * quantity;
         noteManager.add(this);
     }
+
+    @Override
+    public String toString() {
+        return "GoodsReceiveNote{" +
+                "productFactory=" + productFactory +
+                ", productQueueList=" + productQueueList +
+                ", scanner=" + scanner +
+                ", noteId='" + noteId + '\'' +
+                ", userNameCreateNote='" + userNameCreateNote + '\'' +
+                ", reason='" + reason + '\'' +
+                ", productName='" + productName + '\'' +
+                ", quantity=" + quantity +
+                ", totalAmount=" + totalAmount +
+                '}' + "\n";
+    }
 }

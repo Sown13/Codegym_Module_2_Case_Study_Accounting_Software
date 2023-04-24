@@ -36,10 +36,9 @@ public class AccountantCalculate {
 
     public double getBusinessResult() {
         double totalExpense = 0;
-        double businessResult = getTotalSellingAmount() - totalExpense;
         for (Note note : noteManager.getDeliveryNote()) {
              totalExpense += ((GoodsDeliveryNote) note).getTotalExpense();
         }
-        return businessResult;
+        return getTotalSellingAmount() - totalExpense;
     }
 }

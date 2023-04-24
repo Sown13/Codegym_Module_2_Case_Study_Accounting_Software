@@ -9,15 +9,18 @@ import java.util.Scanner;
 
 
 public class UserManager implements IUserManager {
-    private static final UserManager userManager = new UserManager();
+//    private static final UserManager userManager = new UserManager();
     private static final Map<String, User > userList = new HashMap<>();
     static Scanner scanner = new Scanner(System.in);
 
-//    private UserManager() {
-//        userList.put("admin", Admin.getAdmin());
+    public UserManager() {
+        userList.put("admin", Admin.getAdmin());
+    }
+//    public static UserManager getUserManager(){
+//        return userManager;
 //    }
-    public static UserManager getUserManager(){
-        return userManager;
+    public static Map<String,User> getUserList(){
+        return userList;
     }
     public boolean isUserExisted(String userName){
         return userList.containsKey(userName);
