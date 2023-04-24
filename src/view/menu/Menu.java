@@ -253,7 +253,24 @@ public class Menu {
         while (menuCondition);
     }
     public static void userMenu(){
-
+        menuCondition = true;
+        do {
+            System.out.println("""
+                    1/ Show user list
+                    2/ Create new user
+                    3/ Find user
+                    4/ Remove user
+                    0/ Back to previous
+                    """);
+            String choice = scanner.nextLine();
+            switch (choice){
+                case "1" -> Menu.showUserListMenu;
+                case "2" -> Menu.createUserMenu;
+                case "3" -> System.out.println("Funtion is in develop, please comeback later~ Thank you!");
+                case "4" -> userManager.remove();
+                case "0" -> 
+            }
+        }
     }
 
     public static void storeKeeperMenu() {
