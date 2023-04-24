@@ -1,4 +1,4 @@
-package view.menu.bill;
+package view.menu;
 
 import controller.accountant_calculate.AccountantCalculate;
 import manager.note_manager.NoteManager;
@@ -22,14 +22,7 @@ public class Menu {
     private static NoteManager noteManager = new NoteManager();
     private static AccountantCalculate businessCalculate = new AccountantCalculate();
     static Scanner scanner = new Scanner(System.in);
-//    public static void mainMenu(){
-//        do {
-//            System.out.println("""
-//                    1/
-//                    """);
-//        }
-//        while (true);
-//    }
+
     private static void backToRoleMenu(){
         switch (currentRole){
             case ADMIN -> Menu.adminMenu();
@@ -55,35 +48,7 @@ public class Menu {
         }
         while (menuCondition);
     }
-//                case "2" -> {
-//                    System.out.println("Enter the full name");
-//                    String fullName = scanner.nextLine();
-//                    System.out.println("Enter the phone number");
-//                    String phoneNumber = scanner.nextLine();
-//                    System.out.println("Enter the User Name");
-//                    String userName = scanner.nextLine();
-//                    // Need a method to check isExistUserName
-//                    System.out.println("Enter your password");
-//                    String userPassword = scanner.nextLine();
-//                    System.out.println("Re-enter your password");
-//                    String passwordCheck = scanner.nextLine();
-//                    while (!passwordCheck.equals(userPassword)){
-//                        System.out.println("password not right, re-enter your password");
-//                        passwordCheck = scanner.nextLine();
-//                    }
-//                    System.out.println("""
-//                    Choose user role :
-//                    1/ SaleStaff
-//                    2/ StoreKeeper
-//                    3/ Accountant
-//                    """);
-//                    choice = scanner.nextLine();
-//                    switch (choice) {
-//                        case "1" -> userFactory.createUser("SaleStaff", userName, userPassword, fullName);
-//                        case "2" -> userFactory.createUser("StoreKeeper", userName, userPassword, fullName);
-//                        case "3" -> userFactory.createUser("Accountant", userName, userPassword, fullName);
-//                    }
-//                }
+
 
 
     public static void loginMenu() {
@@ -97,23 +62,24 @@ public class Menu {
                 if (userName.equals(checkCondition.getKey()) &&
                         userPassword.equals(checkCondition.getValue().getPassword())) {
                     System.out.println("Loged in as " + checkCondition.getValue().getRole());
+                    currentRole = checkCondition.getValue().getRole();
                     menuCondition = false;
                     switch (checkCondition.getValue().getRole()){
                         case ADMIN -> {
                             Menu.adminMenu();
-                            currentRole = Role.ADMIN;
+//                            currentRole = Role.ADMIN;
                         }
                         case ACCOUNTANT -> {
                             Menu.accountantMenu();
-                            currentRole = Role.ACCOUNTANT;
+//                            currentRole = Role.ACCOUNTANT;
                         }
                         case STOREKEEPER -> {
                             Menu.storeKeeperMenu();
-                            currentRole = Role.STOREKEEPER;
+//                            currentRole = Role.STOREKEEPER;
                         }
                         case SALE_STAFF -> {
                             Menu.saleStaffMenu();
-                            currentRole = Role.SALE_STAFF;
+//                            currentRole = Role.SALE_STAFF;
                         }
                     }
                     break;
@@ -159,7 +125,7 @@ public class Menu {
                     2/ Create Note
                     3/ Find Product
                     4/ Remove a Product
-                    0/ Back to previous
+                    0/ Back to main menu
                     """);
             String choice = scanner.nextLine();
             switch (choice){
@@ -167,7 +133,7 @@ public class Menu {
                 case "2" -> Menu.createNoteMenu();
                 case "3" -> productQueueManager.searchProduct();
                 case "4" -> productQueueManager.remove();
-                case "0" -> adminMenu();
+                case "0" -> Menu.backToRoleMenu();
             }
         }
         while (menuCondition);
@@ -181,7 +147,7 @@ public class Menu {
                 2/ Show EXP Limited Product
                 3/ Show EXP Unlimited Product
                 4/ Sort
-                0/ Back to previous
+                0/ Back to main menu
                 """);
             String choice = scanner.nextLine();
             switch (choice){
@@ -189,7 +155,7 @@ public class Menu {
                 case "2" -> System.out.println(productQueueManager.getExpLimitedList());
                 case "3" -> System.out.println(productQueueManager.getEXPUnlimitedList());
                 case "4" -> productQueueManager.sortByName();
-                case "0" -> Menu.productMenu();
+                case "0" -> Menu.backToRoleMenu();
             }
         }
         while (menuCondition);
@@ -239,7 +205,7 @@ public class Menu {
                     2/ Show receive note list
                     3/ Show delivery note list
                     4/ Find note
-                    0/ Back to previous menu
+                    0/ Back to main menu
                     """);
             String choice = scanner.nextLine();
             switch (choice){
@@ -247,7 +213,7 @@ public class Menu {
                 case "2" -> System.out.println(noteManager.getReceiveNote());
                 case "3" -> System.out.println(noteManager.getDeliveryNote());
                 case "4" -> noteManager.findNote();
-                case "0" -> Menu.businessMenu();
+                case "0" -> Menu.backToRoleMenu();
             }
         }
         while (menuCondition);
@@ -264,25 +230,117 @@ public class Menu {
                     """);
             String choice = scanner.nextLine();
             switch (choice){
-                case "1" -> Menu.showUserListMenu;
-                case "2" -> Menu.createUserMenu;
+                case "1" -> Menu.showUserListMenu();
+                case "2" -> {
+                    System.out.println("Enter the full name");
+                    String fullName = scanner.nextLine();
+                    System.out.println("Enter the phone number");
+                    String phoneNumber = scanner.nextLine();
+                    System.out.println("Enter the User Name");
+                    String userName = scanner.nextLine();
+                    System.out.println("Enter your password");
+                    String userPassword = scanner.nextLine();
+                    System.out.println("Re-enter your password");
+                    String passwordCheck = scanner.nextLine();
+                    while (!passwordCheck.equals(userPassword)){
+                        System.out.println("password not right, re-enter your password");
+                        passwordCheck = scanner.nextLine();
+                    }
+                    System.out.println("""
+                    Choose user role :
+                    1/ SaleStaff
+                    2/ StoreKeeper
+                    3/ Accountant
+                    """);
+                    User tempUser;
+                    choice = scanner.nextLine();
+                    switch (choice) {
+                        case "1" -> {
+                            tempUser = userFactory.createUser("SaleStaff", userName, userPassword, fullName);
+                            tempUser.setPhoneNumber(phoneNumber);
+                            userManager.add(tempUser);
+                        }
+                        case "2" -> {
+                            tempUser = userFactory.createUser("StoreKeeper", userName, userPassword, fullName);
+                            tempUser.setPhoneNumber(phoneNumber);
+                            userManager.add(tempUser);
+                        }
+                        case "3" -> {
+                            tempUser = userFactory.createUser("Accountant", userName, userPassword, fullName);
+                            tempUser.setPhoneNumber(phoneNumber);
+                            userManager.add(tempUser);
+                        }
+                    }
+                }
                 case "3" -> System.out.println("Funtion is in develop, please comeback later~ Thank you!");
                 case "4" -> userManager.remove();
-                case "0" -> 
+                case "0" -> Menu.adminMenu();
             }
         }
+        while (menuCondition);
+    }
+
+    public static void showUserListMenu(){
+        menuCondition = true;
+        do {
+            System.out.println("""
+                    1/ Show all user
+                    2/ Show accountant user
+                    3/ Show Store Keeper user
+                    4/ Show Sale Staff user
+                    0/ Back to previous
+                    """);
+            String choice = scanner.nextLine();
+            switch (choice){
+                case "1" -> userManager.display();
+                case "2","3","4" -> System.out.println("Funtion is in develop, please comeback later~ Thank you!");
+                case "0" -> Menu.userMenu();
+            }
+        }
+        while (menuCondition);
     }
 
     public static void storeKeeperMenu() {
-
+        menuCondition = true;
+        Menu.productMenu();
     }
 
 
     public static void saleStaffMenu() {
-
+        menuCondition = true;
+        do {
+            System.out.println("""
+                    1/ Show product
+                    2/ Create Receive Note
+                    0/ Log out
+                    """);
+            String choice = scanner.nextLine();
+            switch (choice){
+                case "1" -> Menu.showProductMenu();
+                case "2" -> noteFactory.creatNote("ReceiveNote");
+                case "0" -> Menu.startMenu();
+            }
+        }
+        while (menuCondition);
     }
 
     public static void accountantMenu() {
-
+        menuCondition = true;
+        do {
+            System.out.println("""
+                    1/ Show product
+                    2/ Show note list
+                    3/ Business calculate
+                    0/ Log out
+                    """);
+            String choice = scanner.nextLine();
+            switch (choice){
+                case "1" -> Menu.showProductMenu();
+                case "2" -> Menu.showNoteList();
+                case "3" -> businessCalculate.getBusinessResult();
+                case "0" -> Menu.startMenu();
+            }
+        }
+        while (menuCondition);
     }
 }
