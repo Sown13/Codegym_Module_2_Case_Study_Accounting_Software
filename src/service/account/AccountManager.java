@@ -1,4 +1,4 @@
-package manager.account;
+package service.account;
 
 import model.account.Account;
 

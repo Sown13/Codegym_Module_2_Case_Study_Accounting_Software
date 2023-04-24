@@ -1,6 +1,6 @@
-package manager.note_manager;
+package service.note_manager;
 
-import manager.IGeneralManager;
+import service.IGeneralManager;
 import model.note.Note;
 
 import java.util.List;

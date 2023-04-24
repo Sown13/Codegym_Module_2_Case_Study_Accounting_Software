@@ -1,4 +1,4 @@
-package manager.note_manager;
+package service.note_manager;
 
 import model.note.GoodsDeliveryNote;
 import model.note.GoodsReceiveNote;

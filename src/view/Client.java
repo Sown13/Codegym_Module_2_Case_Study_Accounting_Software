@@ -1,6 +1,6 @@
-import view.menu.Menu;
+package view;
 
-public class Main {
+public class Client {
     public static void main(String[] args) {
         Menu.startMenu();
     }

@@ -1,4 +1,4 @@
-package manager.queue;
+package service.queue;
 
 public enum ProductStorageStatus {
     AVAILABLE,

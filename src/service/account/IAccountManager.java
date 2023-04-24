@@ -1,7 +1,7 @@
-package manager.account;
+package service.account;
 
 import model.account.Account;
-import manager.IGeneralManager;
+import service.IGeneralManager;
 
 public interface IAccountManager extends IGeneralManager<Account> {
 }

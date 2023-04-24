@@ -1,9 +1,9 @@
-package view.menu;
+package view;
 
 import controller.accountant_calculate.AccountantCalculate;
-import manager.note_manager.NoteManager;
-import manager.queue.ProductQueueManager;
-import manager.user.UserManager;
+import service.note_manager.NoteManager;
+import service.queue.ProductQueueManager;
+import service.user.UserManager;
 import model.note.NoteFactory;
 import model.user.Role;
 import model.user.User;
@@ -14,6 +14,8 @@ import java.util.Scanner;
 
 public class Menu {
     private static Role currentRole = null;
+    private static String currentUser = null;
+    private static String currentUserFullName = null;
     private static boolean menuCondition;
     private static UserFactory userFactory = new UserFactory();
     private static NoteFactory noteFactory = new NoteFactory();
@@ -35,6 +37,8 @@ public class Menu {
     public static void startMenu() {
         menuCondition = true;
         currentRole = null;
+        currentUser = null;
+        currentUserFullName = null;
         do {
             System.out.println("""
                     1/ Login                
@@ -49,6 +53,15 @@ public class Menu {
         while (menuCondition);
     }
 
+    public static void drawHeader(){
+        System.out.printf("""
+                _______________________________________________________________________________________________
+                | Current User: %s           
+                | Role: %s         
+                | Name: %s          
+                ----------------------------------
+                """,currentUser,currentRole,currentUserFullName);
+    }
 
 
     public static void loginMenu() {
@@ -58,13 +71,15 @@ public class Menu {
             String userName = scanner.nextLine();
             System.out.println("Enter the Password");
             String userPassword = scanner.nextLine();
-            for (Map.Entry<String, User> checkCondition : UserManager.getUserList().entrySet()) {
-                if (userName.equals(checkCondition.getKey()) &&
-                        userPassword.equals(checkCondition.getValue().getPassword())) {
-                    System.out.println("Loged in as " + checkCondition.getValue().getRole());
-                    currentRole = checkCondition.getValue().getRole();
+            for (Map.Entry<String, User> checkConditionEntry : UserManager.getUserList().entrySet()) {
+                if (userName.equals(checkConditionEntry.getKey()) &&
+                        userPassword.equals(checkConditionEntry.getValue().getPassword())) {
+                    System.out.println("Logged in as " + checkConditionEntry.getValue().getRole());
+                    currentRole = checkConditionEntry.getValue().getRole();
+                    currentUser = checkConditionEntry.getValue().getUserName();
+                    currentUserFullName = checkConditionEntry.getValue().getUserFullName();
                     menuCondition = false;
-                    switch (checkCondition.getValue().getRole()){
+                    switch (checkConditionEntry.getValue().getRole()){
                         case ADMIN -> {
                             Menu.adminMenu();
 //                            currentRole = Role.ADMIN;
@@ -98,11 +113,14 @@ public class Menu {
     public static void adminMenu() {
         menuCondition = true;
         do{
+            Menu.drawHeader();
             System.out.println("""
-                    1/ Product Manager
-                    2/ Business Manager
-                    3/ User Manager
-                    0/ Log out
+                    __________________________________
+                    | 1/ Product Manager              |
+                    | 2/ Business Manager             |
+                    | 3/ User Manager                 |
+                    | 0/ Log out                      |
+                    -----------------------------------------------------------------------------------------------
                     """);
             String choice = scanner.nextLine();
             switch (choice){
@@ -120,12 +138,15 @@ public class Menu {
     public static void productMenu(){
         menuCondition = true;
         do {
+            Menu.drawHeader();
             System.out.println("""
-                    1/ Show Product
-                    2/ Create Note
-                    3/ Find Product
-                    4/ Remove a Product
-                    0/ Back to main menu
+                    __________________________________
+                    | 1/ Show Product                 |
+                    | 2/ Create Note                  |
+                    | 3/ Find Product                 |
+                    | 4/ Remove a Product             |
+                    | 0/ Back to main menu            |
+                    -----------------------------------------------------------------------------------------------
                     """);
             String choice = scanner.nextLine();
             switch (choice){
@@ -142,12 +163,15 @@ public class Menu {
     public static void showProductMenu(){
         menuCondition = true;
         do {
+            Menu.drawHeader();
             System.out.println("""
-                1/ Show all
-                2/ Show EXP Limited Product
-                3/ Show EXP Unlimited Product
-                4/ Sort
-                0/ Back to main menu
+                __________________________________
+                | 1/ Show all                     |
+                | 2/ Show EXP Limited Product     |
+                | 3/ Show EXP Unlimited Product   |
+                | 4/ Sort                         |
+                | 0/ Back to main menu            |
+                -----------------------------------------------------------------------------------------------
                 """);
             String choice = scanner.nextLine();
             switch (choice){
@@ -164,15 +188,18 @@ public class Menu {
     public static void createNoteMenu(){
         menuCondition = true;
         do {
+            Menu.drawHeader();
             System.out.println("""
-                    1/ Create Goods Receive Note
-                    2/ Create Goods Delivery Note
-                    0/ Back to previous
+                    __________________________________
+                    | 1/ Create Goods Receive Note    |
+                    | 2/ Create Goods Delivery Note   |
+                    | 0/ Back to previous             |
+                    -----------------------------------------------------------------------------------------------
                     """);
             String choice = scanner.nextLine();
             switch (choice){
-                case "1" -> noteFactory.creatNote("ReceiveNote");
-                case "2" -> noteFactory.creatNote("DeliveryNote");
+                case "1" -> noteFactory.creatNote("ReceiveNote",currentUser);
+                case "2" -> noteFactory.creatNote("DeliveryNote",currentUser);
                 case "0" -> Menu.productMenu();
             }
         }
@@ -181,17 +208,20 @@ public class Menu {
     public static void businessMenu(){
         menuCondition = true;
         do {
+            Menu.drawHeader();
             System.out.println("""
-                    1/ Show note list
-                    2/ Business Result
-                    3/ Add money
-                    0/ Back to previous
+                    __________________________________
+                    | 1/ Show note list               |
+                    | 2/ Business Result              |
+                    | 3/ Add money                    |
+                    | 0/ Back to previous             |
+                    -----------------------------------------------------------------------------------------------
                     """);
             String choice = scanner.nextLine();
             switch (choice){
                 case "1" -> Menu.showNoteList();
                 case "2" -> businessCalculate.getBusinessResult();
-                case "3" -> System.out.println("Function is in maintain, please comback later~!");
+                case "3" -> System.out.println("Function is in maintain, please comeback later~!");
                 case "0" -> Menu.backToRoleMenu();
             }
         }
@@ -200,12 +230,15 @@ public class Menu {
     public static void showNoteList(){
         menuCondition = true;
         do {
+            Menu.drawHeader();
             System.out.println("""
-                    1/ Show all note list
-                    2/ Show receive note list
-                    3/ Show delivery note list
-                    4/ Find note
-                    0/ Back to main menu
+                    __________________________________
+                    | 1/ Show all note list           |
+                    | 2/ Show receive note list       |
+                    | 3/ Show delivery note list      |
+                    | 4/ Find note                    |
+                    | 0/ Back to main menu            |
+                    -----------------------------------------------------------------------------------------------
                     """);
             String choice = scanner.nextLine();
             switch (choice){
@@ -221,12 +254,15 @@ public class Menu {
     public static void userMenu(){
         menuCondition = true;
         do {
+            Menu.drawHeader();
             System.out.println("""
-                    1/ Show user list
-                    2/ Create new user
-                    3/ Find user
-                    4/ Remove user
-                    0/ Back to previous
+                    __________________________________
+                    | 1/ Show user list               |
+                    | 2/ Create new user              |
+                    | 3/ Find user                    |
+                    | 4/ Remove user                  |
+                    | 0/ Back to previous             |
+                    -----------------------------------------------------------------------------------------------
                     """);
             String choice = scanner.nextLine();
             switch (choice){
@@ -247,10 +283,12 @@ public class Menu {
                         passwordCheck = scanner.nextLine();
                     }
                     System.out.println("""
-                    Choose user role :
-                    1/ SaleStaff
-                    2/ StoreKeeper
-                    3/ Accountant
+                    __________________________________
+                    | Choose user role :              |
+                    | 1/ SaleStaff                    |
+                    | 2/ StoreKeeper                  |
+                    | 3/ Accountant                   |
+                    -----------------------------------------------------------------------------------------------
                     """);
                     User tempUser;
                     choice = scanner.nextLine();
@@ -272,7 +310,7 @@ public class Menu {
                         }
                     }
                 }
-                case "3" -> System.out.println("Funtion is in develop, please comeback later~ Thank you!");
+                case "3" -> System.out.println("Function is in develop, please comeback later~ Thank you!");
                 case "4" -> userManager.remove();
                 case "0" -> Menu.adminMenu();
             }
@@ -283,17 +321,20 @@ public class Menu {
     public static void showUserListMenu(){
         menuCondition = true;
         do {
+            Menu.drawHeader();
             System.out.println("""
-                    1/ Show all user
-                    2/ Show accountant user
-                    3/ Show Store Keeper user
-                    4/ Show Sale Staff user
-                    0/ Back to previous
+                    __________________________________
+                    | 1/ Show all user                |
+                    | 2/ Show accountant user         |
+                    | 3/ Show Store Keeper user       |
+                    | 4/ Show Sale Staff user         |
+                    | 0/ Back to previous             |
+                    -----------------------------------------------------------------------------------------------
                     """);
             String choice = scanner.nextLine();
             switch (choice){
                 case "1" -> userManager.display();
-                case "2","3","4" -> System.out.println("Funtion is in develop, please comeback later~ Thank you!");
+                case "2","3","4" -> System.out.println("Function is in develop, please comeback later~ Thank you!");
                 case "0" -> Menu.userMenu();
             }
         }
@@ -309,15 +350,18 @@ public class Menu {
     public static void saleStaffMenu() {
         menuCondition = true;
         do {
+            Menu.drawHeader();
             System.out.println("""
-                    1/ Show product
-                    2/ Create Receive Note
-                    0/ Log out
+                    __________________________________
+                    | 1/ Show product                 |
+                    | 2/ Create Receive Note          |
+                    | 0/ Log out                      |
+                    -----------------------------------------------------------------------------------------------
                     """);
             String choice = scanner.nextLine();
             switch (choice){
                 case "1" -> Menu.showProductMenu();
-                case "2" -> noteFactory.creatNote("ReceiveNote");
+                case "2" -> noteFactory.creatNote("ReceiveNote",currentUser);
                 case "0" -> Menu.startMenu();
             }
         }
@@ -327,11 +371,14 @@ public class Menu {
     public static void accountantMenu() {
         menuCondition = true;
         do {
+            Menu.drawHeader();
             System.out.println("""
-                    1/ Show product
-                    2/ Show note list
-                    3/ Business calculate
-                    0/ Log out
+                    __________________________________
+                    | 1/ Show product                 |
+                    | 2/ Show note list               |
+                    | 3/ Business calculate           |
+                    | 0/ Log out                      |
+                    -----------------------------------------------------------------------------------------------
                     """);
             String choice = scanner.nextLine();
             switch (choice){

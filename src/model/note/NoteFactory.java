@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 public class NoteFactory {
     Scanner scanner = new Scanner(System.in);
-    public Note creatNote(String type){
+    public Note creatNote(String type, String userNameCreateNote){
         System.out.println("Enter the productName");
         String productName = scanner.nextLine();
         System.out.println("Enter the quantity");
         int quantity = Integer.parseInt(scanner.nextLine());
         switch (type){
             case "ReceiveNote" -> {
-                return new GoodsReceiveNote(productName,quantity);
+                return new GoodsReceiveNote(productName,quantity,userNameCreateNote);
             }
             case "DeliveryNote" -> {
-                return new GoodsDeliveryNote(productName,quantity);
+                return new GoodsDeliveryNote(productName,quantity,userNameCreateNote);
             }
             default -> {
                 return null ;

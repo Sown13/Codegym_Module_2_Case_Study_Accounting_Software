@@ -1,4 +1,4 @@
-package manager.note_manager;
+package service.note_manager;
 
 import model.note.Note;
 import model.user.Role;

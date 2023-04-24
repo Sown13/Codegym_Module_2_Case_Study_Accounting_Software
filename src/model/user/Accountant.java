@@ -1,7 +1,7 @@
 package model.user;
 
-import manager.note_manager.NoteManagerProxy;
-import manager.queue.ProductQueueManagerProxy;
+import service.note_manager.NoteManagerProxy;
+import service.queue.ProductQueueManagerProxy;
 
 public class Accountant extends User {
     public Accountant(String userName, String userPassword, String userFullname) {

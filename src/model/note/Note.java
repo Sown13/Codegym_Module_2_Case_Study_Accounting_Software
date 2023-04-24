@@ -10,7 +10,7 @@ public abstract class Note {
 
     public Note() {
     }
-    public Note(String productName, int quantity){
+    public Note(String productName, int quantity,String userNameCreateNote){
         this.productName = productName;
         this.quantity = quantity;
     }

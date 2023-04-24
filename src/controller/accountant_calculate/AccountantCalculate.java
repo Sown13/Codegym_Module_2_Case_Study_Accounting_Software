@@ -1,7 +1,7 @@
 package controller.accountant_calculate;
 
-import manager.note_manager.NoteManager;
-import manager.queue.ProductQueueManager;
+import service.note_manager.NoteManager;
+import service.queue.ProductQueueManager;
 import model.note.GoodsDeliveryNote;
 import model.note.Note;
 

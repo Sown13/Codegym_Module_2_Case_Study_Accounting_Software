@@ -2,9 +2,9 @@ package model.note;
 
 //import model.product.ProductFactory;
 
-import manager.note_manager.NoteManager;
-import manager.queue.ProductQueue;
-import manager.queue.ProductQueueManager;
+import service.note_manager.NoteManager;
+import service.queue.ProductQueue;
+import service.queue.ProductQueueManager;
 import model.product.Product;
 
 //Phiếu xuất kho, sẽ cần lưu lại sau mỗi lần lập;
@@ -13,8 +13,8 @@ public class GoodsDeliveryNote extends Note {
     private Product productDelivery;
     private double totalExpense;
 
-    public GoodsDeliveryNote(String productName, int quantity) {
-        super(productName, quantity);
+    public GoodsDeliveryNote(String productName, int quantity,String userNameCreateNote) {
+        super(productName, quantity,userNameCreateNote);
         specialNoteValue++;
         this.noteId = "DeliverNote.No" + specialNoteValue;
         for (ProductQueue productQueue : ProductQueueManager.getProductQueueList()) {

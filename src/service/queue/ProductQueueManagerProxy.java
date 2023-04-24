@@ -1,8 +1,6 @@
-package manager.queue;
+package service.queue;
 
 import model.user.Role;
-
-import java.util.List;
 
 public class ProductQueueManagerProxy implements IProductQueueManager{
     private final Role role;

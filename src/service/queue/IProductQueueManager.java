@@ -1,8 +1,6 @@
-package manager.queue;
+package service.queue;
 
-import manager.IGeneralManager;
-
-import java.util.List;
+import service.IGeneralManager;
 
 public interface IProductQueueManager extends IGeneralManager<ProductQueue> {
     void searchProduct();

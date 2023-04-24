@@ -1,8 +1,8 @@
 package model.note;
 
-import manager.note_manager.NoteManager;
-import manager.queue.ProductQueue;
-import manager.queue.ProductQueueManager;
+import service.note_manager.NoteManager;
+import service.queue.ProductQueue;
+import service.queue.ProductQueueManager;
 import model.product.Product;
 import model.product.ProductFactory;
 
@@ -16,8 +16,8 @@ public class GoodsReceiveNote extends Note {
 
     private static int specialNoteValue = 10_000;
 
-    public GoodsReceiveNote(String productName, int quantity) {
-       super(productName,quantity);
+    public GoodsReceiveNote(String productName, int quantity,String userNameCreateNote) {
+       super(productName,quantity,userNameCreateNote);
         specialNoteValue++;
         this.noteId = "ReceiverNote.No" + specialNoteValue;
         System.out.println("""

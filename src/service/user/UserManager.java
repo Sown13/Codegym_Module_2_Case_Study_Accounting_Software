@@ -1,4 +1,4 @@
-package manager.user;
+package service.user;
 
 import model.user.Admin;
 import model.user.User;
