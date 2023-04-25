@@ -1,6 +1,8 @@
 package model.note;
 
-public abstract class Note {
+import java.io.Serializable;
+
+public abstract class Note implements Serializable {
     protected String noteId;
     protected String userNameCreateNote;
     protected String reason;

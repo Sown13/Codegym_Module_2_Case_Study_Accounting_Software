@@ -1,19 +1,38 @@
 package service.note_manager;
 
+import io.ReadData;
+import io.ReadMapData;
+import io.WriteData;
+import io.WriteMapData;
 import model.note.GoodsDeliveryNote;
 import model.note.GoodsReceiveNote;
 import model.note.Note;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class NoteManager implements INoteManager{
     private static List<Note> noteList = new ArrayList<>();
-    Scanner scanner = new Scanner(System.in);
 
 
+    public void saveDataReceiveNote(){
+        WriteData<Note> saver = new WriteData<>();
+//        String path = "src/io/database/receive_note_save.txt";
+//        List<Note> receiveNoteList = getReceiveNote();
+//        saver.writeToSaveFile(receiveNoteList,path);
+    }
+//    public void saveDataDeliveryNote(){
+//        WriteData<Note> saver = new WriteData<>();
+//        String path = "src/io/database/delivery_note_save.txt";
+//        List<Note> deliveryNoteList = getDeliveryNote();
+//        saver.writeToSaveFile(deliveryNoteList,path);
+//    }
+//    public static void loadNoteList(){
+//        ReadData<Note> loader = new ReadData<>();
+//        List<Note> part1 = loader.loadListData("src/io/database/receive_note_save.txt");
+//        List<Note> part2 = loader.loadListData("src/io/database/delivery_note_save.txt");
+//        part1.addAll((part1.size()-1),part2);
+//        noteList = part1;
+//    }
     @Override
     public void add(Note note) {
         noteList.add(note);
@@ -24,6 +43,7 @@ public class NoteManager implements INoteManager{
     }
     @Override
     public void remove() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Remove by id - Please enter the NoteID");
         String noteId = scanner.nextLine();
         if(isNoteExisted(noteId)){
@@ -46,6 +66,7 @@ public class NoteManager implements INoteManager{
 
     @Override
     public void edit() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Remove by id - Please enter the NoteID");
         String noteId = scanner.nextLine();
         if(isNoteExisted(noteId)){
@@ -110,17 +131,19 @@ public class NoteManager implements INoteManager{
         noteList.sort(Comparator.comparing(Note::getNoteId));
     }
     public void findNote(){
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter keyword");
         String keyWord = scanner.nextLine();
-        List<Note> resultList = noteList
+        List<Note> resultList = new ArrayList<>(noteList
                 .stream()
-                .filter(note -> note.getProductName().contains(keyWord)||
+                .filter(note -> note.getProductName().contains(keyWord) ||
                         note.getNoteId().contains(keyWord))
-                .toList();
+                .toList());
         resultList.sort(Comparator.comparing(Note::getNoteId));
         int order = 0;
         for (Note note : resultList){
             System.out.println(++order + " - " + note);
         }
     }
+
 }

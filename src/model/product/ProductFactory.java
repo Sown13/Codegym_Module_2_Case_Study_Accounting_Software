@@ -3,8 +3,9 @@ package model.product;
 import java.util.Scanner;
 
 public class ProductFactory {
-    static Scanner scanner = new Scanner(System.in);
+
     public Product makeProduct(String choice, String name){
+        Scanner scanner = new Scanner(System.in);
        switch (choice){
            case "limited" -> {
                return new ProductEXPLimited(name);

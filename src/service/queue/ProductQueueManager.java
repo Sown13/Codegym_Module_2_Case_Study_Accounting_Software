@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class ProductQueueManager implements IProductQueueManager {
     private static List<ProductQueue> productQueueList = new ArrayList<>();
-    Scanner scanner = new Scanner(System.in);
 
     public ProductQueueManager() {
     }
@@ -39,6 +38,7 @@ public class ProductQueueManager implements IProductQueueManager {
 
     @Override
     public void remove() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Remove product by name - Please Enter the Product name:");
         String productName = scanner.nextLine();
         if (isProductExisted(productName)) {
@@ -63,6 +63,7 @@ public class ProductQueueManager implements IProductQueueManager {
 
     @Override
     public void edit() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Edit product by name - Please enter the product name: ");
         String productName = scanner.nextLine();
         if (isProductExisted(productName)) {
@@ -110,6 +111,7 @@ public class ProductQueueManager implements IProductQueueManager {
     }
     @Override
     public void searchProduct(){
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the key word");
         String keyword = scanner.nextLine();
         List<ProductQueue> searchResult = productQueueList
@@ -129,18 +131,16 @@ public class ProductQueueManager implements IProductQueueManager {
         return totalCurrentOriginalPrice;
     }
     public List<ProductQueue> getEXPUnlimitedList(){
-        List<ProductQueue> expUnlimitedList = productQueueList
+        return productQueueList
                 .stream()
                 .filter(productQueue -> productQueue.getRepresentationProduct() instanceof ProductEXPUnLimited)
                 .toList();
-        return expUnlimitedList;
     }
     public List<ProductQueue> getExpLimitedList(){
-        List<ProductQueue> expLimitedList = productQueueList
+        return productQueueList
                 .stream()
                 .filter(productQueue -> productQueue.getRepresentationProduct() instanceof ProductEXPLimited)
                 .toList();
-        return expLimitedList;
     }
 
     public void sortByName(){

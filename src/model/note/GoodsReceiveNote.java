@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class GoodsReceiveNote extends Note {
     ProductFactory productFactory = new ProductFactory();
     ProductQueueManager productQueueList = new ProductQueueManager();
-    Scanner scanner = new Scanner(System.in);
 
     private static int specialNoteValue = 10_000;
 
@@ -25,6 +24,7 @@ public class GoodsReceiveNote extends Note {
                 1/ limited exp
                 2/ unlimited exp
                 """);
+        Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
         Product tempProduct;
         if (choice.equals("1")) {
@@ -49,7 +49,6 @@ public class GoodsReceiveNote extends Note {
         return "GoodsReceiveNote{" +
                 "productFactory=" + productFactory +
                 ", productQueueList=" + productQueueList +
-                ", scanner=" + scanner +
                 ", noteId='" + noteId + '\'' +
                 ", userNameCreateNote='" + userNameCreateNote + '\'' +
                 ", reason='" + reason + '\'' +

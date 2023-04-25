@@ -1,10 +1,11 @@
 package model.product;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.PriorityQueue;
 
-public abstract class Product {
+public abstract class Product implements Serializable {
     private static int hiddenSpecialValue = 10_000;
     protected String productId;
     protected String productName;

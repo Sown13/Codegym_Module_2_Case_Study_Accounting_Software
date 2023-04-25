@@ -4,9 +4,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
+import java.util.Map;
 
-public class WriteData<T> {
-    public void writeToSaveFile(List<T> exportList, String pathName){
+public class WriteMapData<K,T> {
+    public void writeToSaveFile(Map<K,T> exportList, String pathName){
         File saveFile = new File(pathName);
         try(FileOutputStream fileOutputStream = new FileOutputStream(saveFile);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream) ){
@@ -16,4 +17,5 @@ public class WriteData<T> {
             e.printStackTrace();
         }
     }
+
 }

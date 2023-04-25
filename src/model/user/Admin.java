@@ -3,8 +3,10 @@ package model.user;
 import service.note_manager.NoteManagerProxy;
 import service.queue.ProductQueueManagerProxy;
 
+import java.io.Serializable;
 
-public class Admin extends User{
+
+public class Admin extends User {
     private static final Admin admin = new Admin();
     private static double money;
     private static double capital;

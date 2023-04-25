@@ -1,5 +1,7 @@
 package service.user;
 
+import io.ReadMapData;
+import io.WriteMapData;
 import model.user.Admin;
 import model.user.User;
 
@@ -10,15 +12,23 @@ import java.util.Scanner;
 
 public class UserManager implements IUserManager {
 //    private static final UserManager userManager = new UserManager();
-    private static final Map<String, User > userList = new HashMap<>();
-    static Scanner scanner = new Scanner(System.in);
+    private static Map<String, User > userList = new HashMap<>();
+    WriteMapData<String,User> saver = new WriteMapData<>();
+    private static ReadMapData<String, User> loader = new ReadMapData<>();
 
+
+    public void saveUser(){
+        String path = "src/io/database/user_save.txt";
+        saver.writeToSaveFile(userList,path);
+    }
+    public static void loadUser(){
+        String path = "src/io/database/user_save.txt";
+        userList = loader.loadMapData(path);
+    }
     public UserManager() {
         userList.put("admin", Admin.getAdmin());
     }
-//    public static UserManager getUserManager(){
-//        return userManager;
-//    }
+
     public static Map<String,User> getUserList(){
         return userList;
     }
@@ -30,6 +40,7 @@ public class UserManager implements IUserManager {
     public void add(User user) {
         if(!isUserExisted(user.getUserName())) {
             userList.put(user.getUserName(), user);
+            saveUser();
         }
         else {
             System.out.println("This user name is already existed!");
@@ -38,6 +49,7 @@ public class UserManager implements IUserManager {
 
     @Override
     public void remove() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the user name that you want to remove");
         String userName = scanner.nextLine();
         if(isUserExisted(userName)){
@@ -49,6 +61,7 @@ public class UserManager implements IUserManager {
             String choice = scanner.nextLine();
             if (choice.equals("1")) {
                 userList.remove(userName);
+                saveUser();
                 System.out.println("User deleted");
             } else {
                 System.out.println("Canceled");
@@ -61,6 +74,7 @@ public class UserManager implements IUserManager {
 
     @Override
     public void edit() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the user name that you want to edit");
         String userName = scanner.nextLine();
         if(isUserExisted(userName)){
@@ -70,6 +84,7 @@ public class UserManager implements IUserManager {
             String phoneNumber = scanner.nextLine();
             userList.get(userName).setUserFullName(fullName);
             userList.get(userName).setPhoneNumber(phoneNumber);
+            saveUser();
         }
         else {
             System.out.println("User not found!");

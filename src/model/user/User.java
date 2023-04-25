@@ -3,8 +3,10 @@ package model.user;
 import service.note_manager.NoteManagerProxy;
 import service.queue.ProductQueueManagerProxy;
 
+import java.io.Serializable;
 
-public abstract class User {
+
+public abstract class User implements Serializable {
     protected String userName;
     protected String password;
     protected String userFullName;

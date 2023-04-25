@@ -35,6 +35,8 @@ public class Menu {
     }
 
     public static void startMenu() {
+        UserManager.loadUser();
+//        NoteManager.loadNoteList();
         menuCondition = true;
         currentRole = null;
         currentUser = null;
