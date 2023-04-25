@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 
 public class Admin extends User {
+    private static final long serialVersionUID = 6529685098267757690L;
     private static final Admin admin = new Admin();
     private static double money;
     private static double capital;

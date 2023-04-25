@@ -1,9 +1,7 @@
 package service.note_manager;
 
 import io.ReadData;
-import io.ReadMapData;
 import io.WriteData;
-import io.WriteMapData;
 import model.note.GoodsDeliveryNote;
 import model.note.GoodsReceiveNote;
 import model.note.Note;
@@ -14,28 +12,33 @@ public class NoteManager implements INoteManager{
     private static List<Note> noteList = new ArrayList<>();
 
 
-    public void saveDataReceiveNote(){
+    public void saveDataReceiveNote() {
         WriteData<Note> saver = new WriteData<>();
-//        String path = "src/io/database/receive_note_save.txt";
-//        List<Note> receiveNoteList = getReceiveNote();
-//        saver.writeToSaveFile(receiveNoteList,path);
+        String path = "src/io/database/receive_note_save.txt";
+        List<Note> receiveNoteList = getReceiveNote();
+        saver.writeToSaveFile(receiveNoteList,path);
     }
-//    public void saveDataDeliveryNote(){
-//        WriteData<Note> saver = new WriteData<>();
-//        String path = "src/io/database/delivery_note_save.txt";
-//        List<Note> deliveryNoteList = getDeliveryNote();
-//        saver.writeToSaveFile(deliveryNoteList,path);
-//    }
-//    public static void loadNoteList(){
-//        ReadData<Note> loader = new ReadData<>();
-//        List<Note> part1 = loader.loadListData("src/io/database/receive_note_save.txt");
-//        List<Note> part2 = loader.loadListData("src/io/database/delivery_note_save.txt");
-//        part1.addAll((part1.size()-1),part2);
-//        noteList = part1;
-//    }
+    public void saveDataDeliveryNote(){
+        WriteData<Note> saver = new WriteData<>();
+        String path = "src/io/database/delivery_note_save.txt";
+        List<Note> deliveryNoteList = getDeliveryNote();
+        saver.writeToSaveFile(deliveryNoteList,path);
+    }
+    public void saveNote(){
+        saveDataReceiveNote();
+        saveDataDeliveryNote();
+    }
+    public static void loadNoteList(){
+        ReadData<Note> loader = new ReadData<>();
+        List<Note> part1 = loader.loadListData("src/io/database/receive_note_save.txt");
+        List<Note> part2 = loader.loadListData("src/io/database/delivery_note_save.txt");
+        part1.addAll((part1.size()),part2);
+        noteList = part1;
+    }
     @Override
     public void add(Note note) {
         noteList.add(note);
+        saveNote();
     }
 
     public boolean isNoteExisted(String noteId){
@@ -62,6 +65,7 @@ public class NoteManager implements INoteManager{
                 System.out.println("Canceled");
             }
         }
+        saveNote();
     }
 
     @Override
@@ -92,6 +96,7 @@ public class NoteManager implements INoteManager{
                 System.out.println("Canceled");
             }
         }
+        saveNote();
     }
 
     @Override
@@ -123,6 +128,7 @@ public class NoteManager implements INoteManager{
     public void resetNote(){
         // Need a write method to save old note list to file and read it later
         noteList.clear();
+        saveNote();
     }
     public List<Note> getNoteList(){
         return noteList;
@@ -130,14 +136,14 @@ public class NoteManager implements INoteManager{
     public void sortNoteList(){
         noteList.sort(Comparator.comparing(Note::getNoteId));
     }
-    public void findNote(){
+    public void seachNote(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter keyword");
         String keyWord = scanner.nextLine();
         List<Note> resultList = new ArrayList<>(noteList
                 .stream()
-                .filter(note -> note.getProductName().contains(keyWord) ||
-                        note.getNoteId().contains(keyWord))
+                .filter(note -> note.getProductName().toLowerCase().contains(keyWord.toLowerCase()) ||
+                        note.getNoteId().toLowerCase().contains(keyWord.toLowerCase()))
                 .toList());
         resultList.sort(Comparator.comparing(Note::getNoteId));
         int order = 0;

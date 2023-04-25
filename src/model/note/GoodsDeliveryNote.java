@@ -9,6 +9,7 @@ import model.product.Product;
 
 //Phiếu xuất kho, sẽ cần lưu lại sau mỗi lần lập;
 public class GoodsDeliveryNote extends Note {
+    private static final long serialVersionUID = 6529685098267757690L;
     private static int specialNoteValue = 10_000;
     private Product productDelivery;
     private double totalExpense;

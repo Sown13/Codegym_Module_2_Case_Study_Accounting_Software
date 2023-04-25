@@ -3,6 +3,7 @@ package service.queue;
 import model.user.Role;
 
 public class ProductQueueManagerProxy implements IProductQueueManager{
+    private static final long serialVersionUID = 6529685098267757690L;
     private final Role role;
     private final ProductQueueManager realProductQueueManager = new ProductQueueManager();
     public ProductQueueManagerProxy(Role userRole){

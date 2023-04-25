@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 //Phiếu nhập kho, sẽ cần lưu lại sau mỗi lần lập;
 public class GoodsReceiveNote extends Note {
+    private static final long serialVersionUID = 6529685098267757690L;
     ProductFactory productFactory = new ProductFactory();
     ProductQueueManager productQueueList = new ProductQueueManager();
 

@@ -14,7 +14,7 @@ public class UserManager implements IUserManager {
 //    private static final UserManager userManager = new UserManager();
     private static Map<String, User > userList = new HashMap<>();
     WriteMapData<String,User> saver = new WriteMapData<>();
-    private static ReadMapData<String, User> loader = new ReadMapData<>();
+    private final static ReadMapData<String, User> loader = new ReadMapData<>();
 
 
     public void saveUser(){
@@ -24,9 +24,9 @@ public class UserManager implements IUserManager {
     public static void loadUser(){
         String path = "src/io/database/user_save.txt";
         userList = loader.loadMapData(path);
+        userList.put("admin", Admin.getAdmin());
     }
     public UserManager() {
-        userList.put("admin", Admin.getAdmin());
     }
 
     public static Map<String,User> getUserList(){
@@ -40,11 +40,11 @@ public class UserManager implements IUserManager {
     public void add(User user) {
         if(!isUserExisted(user.getUserName())) {
             userList.put(user.getUserName(), user);
-            saveUser();
         }
         else {
             System.out.println("This user name is already existed!");
         }
+        saveUser();
     }
 
     @Override

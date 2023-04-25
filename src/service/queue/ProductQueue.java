@@ -2,10 +2,12 @@ package service.queue;
 
 import model.product.Product;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 
-public class ProductQueue {
+public class ProductQueue implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
     private final Product representationProduct;
     private final String productQueueName;
     private int quantity = 0;

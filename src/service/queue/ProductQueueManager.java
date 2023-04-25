@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ProductQueueManager implements IProductQueueManager {
+    private static final long serialVersionUID = 6529685098267757690L;
     private static List<ProductQueue> productQueueList = new ArrayList<>();
 
     public ProductQueueManager() {
