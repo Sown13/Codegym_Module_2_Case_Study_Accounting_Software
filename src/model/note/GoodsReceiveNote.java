@@ -6,10 +6,12 @@ import service.queue.ProductQueueManager;
 import model.product.Product;
 import model.product.ProductFactory;
 
+import java.io.Serial;
 import java.util.Scanner;
 
 //Phiếu nhập kho, sẽ cần lưu lại sau mỗi lần lập;
 public class GoodsReceiveNote extends Note {
+    @Serial
     private static final long serialVersionUID = 6529685098267757690L;
     ProductFactory productFactory = new ProductFactory();
     static ProductQueueManager productQueueList = new ProductQueueManager();
@@ -40,7 +42,6 @@ public class GoodsReceiveNote extends Note {
         double sellPrice = Double.parseDouble(scanner.nextLine());
         tempProduct.setProductSellPrice(sellPrice);
         productQueueList.add(new ProductQueue(quantity,tempProduct));
-        productQueueList.display();
         NoteManager noteManager = new NoteManager();
         this.totalAmount = tempProduct.getProductOriginalPrice() * quantity;
         noteManager.add(this);

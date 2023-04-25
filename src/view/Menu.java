@@ -10,6 +10,7 @@ import service.queue.ProductQueueManager;
 import service.user.UserManager;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Menu {
@@ -17,12 +18,12 @@ public class Menu {
     private static String currentUser = null;
     private static String currentUserFullName = null;
     private static boolean menuCondition;
-    private static UserFactory userFactory = new UserFactory();
-    private static NoteFactory noteFactory = new NoteFactory();
-    private static UserManager userManager = new UserManager();
-    private static ProductQueueManager productQueueManager = new ProductQueueManager();
-    private static NoteManager noteManager = new NoteManager();
-    private static AccountantCalculate businessCalculate = new AccountantCalculate();
+    private static final UserFactory userFactory = new UserFactory();
+    private static final NoteFactory noteFactory = new NoteFactory();
+    private static final UserManager userManager = new UserManager();
+    private static final ProductQueueManager productQueueManager = new ProductQueueManager();
+    private static final NoteManager noteManager = new NoteManager();
+    private static final AccountantCalculate businessCalculate = new AccountantCalculate();
     static Scanner scanner = new Scanner(System.in);
 
     private static void backToRoleMenu() {
@@ -37,6 +38,7 @@ public class Menu {
     public static void loadSave() {
         UserManager.loadUser();
         NoteManager.loadNoteList();
+        productQueueManager.display();
     }
 
     public static void startMenu() {
@@ -48,7 +50,7 @@ public class Menu {
         do {
             System.out.println("""
                     _______________________________________________________________________________________________
-                    | 1/ Login                        |   
+                    | 1/ Login                        |
                     | 0/ Exit                         |
                     ----------------------------------
                     """);
@@ -64,9 +66,9 @@ public class Menu {
     public static void drawHeader() {
         System.out.printf("""
                 _______________________________________________________________________________________________
-                | Current User: %s           
-                | Role: %s         
-                | Name: %s          
+                | Current User: %s
+                | Role: %s
+                | Name: %s
                 ----------------------------------
                 """, currentUser, currentRole, currentUserFullName);
     }
@@ -88,22 +90,14 @@ public class Menu {
                     currentUserFullName = checkConditionEntry.getValue().getUserFullName();
                     menuCondition = false;
                     switch (checkConditionEntry.getValue().getRole()) {
-                        case ADMIN -> {
-                            Menu.adminMenu();
-//                            currentRole = Role.ADMIN;
-                        }
-                        case ACCOUNTANT -> {
-                            Menu.accountantMenu();
-//                            currentRole = Role.ACCOUNTANT;
-                        }
-                        case STOREKEEPER -> {
-                            Menu.storeKeeperMenu();
-//                            currentRole = Role.STOREKEEPER;
-                        }
-                        case SALE_STAFF -> {
-                            Menu.saleStaffMenu();
-//                            currentRole = Role.SALE_STAFF;
-                        }
+                        case ADMIN -> //                            currentRole = Role.ADMIN;
+                                Menu.adminMenu();
+                        case ACCOUNTANT -> //                            currentRole = Role.ACCOUNTANT;
+                                Menu.accountantMenu();
+                        case STOREKEEPER -> //                            currentRole = Role.STOREKEEPER;
+                                Menu.storeKeeperMenu();
+                        case SALE_STAFF -> //                            currentRole = Role.SALE_STAFF;
+                                Menu.saleStaffMenu();
                     }
                     break;
                 } else {
@@ -159,14 +153,18 @@ public class Menu {
                     """);
             String choice = scanner.nextLine();
             switch (choice) {
-                case "1" -> Menu.showProductMenu();
+                case "1" -> {
+                    productQueueManager.display();
+                    Menu.showProductMenu();
+                }
                 case "2" -> Menu.createNoteMenu();
                 case "3" -> productQueueManager.searchProduct();
                 case "4" -> productQueueManager.remove();
                 case "0" -> {
-                    switch (currentRole){
-                        case STOREKEEPER -> Menu.startMenu();
-                        default -> Menu.backToRoleMenu();
+                    if (Objects.requireNonNull(currentRole) == Role.STOREKEEPER) {
+                        Menu.startMenu();
+                    } else {
+                        Menu.backToRoleMenu();
                     }
                 }
             }
@@ -212,8 +210,8 @@ public class Menu {
                     """);
             String choice = scanner.nextLine();
             switch (choice) {
-                case "1" -> noteFactory.creatNote("ReceiveNote", currentUser);
-                case "2" -> noteFactory.creatNote("DeliveryNote", currentUser);
+                case "1" -> noteFactory.createNote("ReceiveNote", currentUser);
+                case "2" -> noteFactory.createNote("DeliveryNote", currentUser);
                 case "0" -> Menu.productMenu();
             }
         }
@@ -379,7 +377,7 @@ public class Menu {
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1" -> Menu.showProductMenu();
-                case "2" -> noteFactory.creatNote("DeliveryNote", currentUser);
+                case "2" -> noteFactory.createNote("DeliveryNote", currentUser);
                 case "0" -> Menu.startMenu();
             }
         }

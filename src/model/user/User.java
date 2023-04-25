@@ -3,10 +3,12 @@ package model.user;
 import service.note_manager.NoteManagerProxy;
 import service.queue.ProductQueueManagerProxy;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 
 public abstract class User implements Serializable {
+    @Serial
     private static final long serialVersionUID = 6529685098267757690L;
     protected String userName;
     protected String password;

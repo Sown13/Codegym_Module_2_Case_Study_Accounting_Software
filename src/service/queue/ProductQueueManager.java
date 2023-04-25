@@ -4,12 +4,14 @@ import model.product.ProductEXPLimited;
 import model.product.ProductEXPUnLimited;
 import model.sout.NotifyForm;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
 public class ProductQueueManager implements IProductQueueManager {
+    @Serial
     private static final long serialVersionUID = 6529685098267757690L;
     private static List<ProductQueue> productQueueList = new ArrayList<>();
 

@@ -7,8 +7,11 @@ import service.queue.ProductQueue;
 import service.queue.ProductQueueManager;
 import model.product.Product;
 
+import java.io.Serial;
+
 //Phiếu xuất kho, sẽ cần lưu lại sau mỗi lần lập;
 public class GoodsDeliveryNote extends Note {
+    @Serial
     private static final long serialVersionUID = 6529685098267757690L;
     public static int specialNoteValue = 10_000;
     private Product productDelivery;
