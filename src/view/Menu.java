@@ -38,11 +38,9 @@ public class Menu {
     public static void loadSave() {
         UserManager.loadUser();
         NoteManager.loadNoteList();
-        productQueueManager.display();
     }
 
     public static void startMenu() {
-        productQueueManager.display();
         menuCondition = true;
         currentRole = null;
         currentUser = null;

@@ -3,9 +3,7 @@ package io;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ReadMapData<K,T> {
@@ -20,7 +18,7 @@ public class ReadMapData<K,T> {
                 reader.close();
             }
             fi.close();
-            System.out.println("Read success");
+            System.out.println("Data loaded");
         } catch (Exception e) {
             e.printStackTrace();
         }

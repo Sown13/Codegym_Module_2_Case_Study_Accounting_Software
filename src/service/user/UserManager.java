@@ -25,6 +25,7 @@ public class UserManager implements IUserManager {
         String path = "src/io/database/user_save.txt";
         userList = loader.loadMapData(path);
         userList.put("admin", Admin.getAdmin());
+        System.out.println("User loaded!");
     }
     public UserManager() {
     }

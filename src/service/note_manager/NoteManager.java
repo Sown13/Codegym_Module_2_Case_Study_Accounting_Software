@@ -42,7 +42,7 @@ public class NoteManager implements INoteManager{
             noteList.add(note);
             GoodsDeliveryNote.specialNoteValue = ++tempSerial_2;
         }
-
+        System.out.println("Note imported!");
     }
     @Override
     public void add(Note note) {

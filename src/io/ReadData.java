@@ -15,7 +15,7 @@ public class ReadData<T> {
             if (fi.available() > 0) {
                 ObjectInputStream reader = new ObjectInputStream(fi);
                 list = (List<T>) reader.readObject();
-                System.out.println("Read success");
+                System.out.println("Data loaded");
                 reader.close();
             }
             fi.close();
