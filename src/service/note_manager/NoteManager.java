@@ -121,7 +121,7 @@ public class NoteManager implements INoteManager{
                 .stream()
                 .filter(note -> note instanceof GoodsReceiveNote)
                 .toList();
-        System.out.println(receiveNoteList);
+//        System.out.println(receiveNoteList);
         return receiveNoteList;
     }
     @Override
@@ -130,12 +130,11 @@ public class NoteManager implements INoteManager{
                 .stream()
                 .filter(note -> note instanceof GoodsDeliveryNote)
                 .toList();
-        System.out.println(deliveryNoteList);
+//        System.out.println(deliveryNoteList);
         return deliveryNoteList;
     }
     @Override
     public void resetNote(){
-        // Need a write method to save old note list to file and read it later
         noteList.clear();
         saveNote();
     }

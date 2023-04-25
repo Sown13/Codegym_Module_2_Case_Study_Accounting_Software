@@ -25,7 +25,7 @@ public class GoodsDeliveryNote extends Note {
             if (productQueue.getProductQueueName().equals(productName)) {
                 this.productDelivery = productQueue.getRepresentationProduct();
                 this.totalAmount = productQueue.decreaseQuantity(quantity);
-                this.totalExpense = productQueue.getTotalOriginalPrice();
+                setTotalExpense(productQueue.getTotalOriginalPrice());
                 break;
             }
         }
@@ -39,6 +39,10 @@ public class GoodsDeliveryNote extends Note {
 
     public double getTotalExpense() {
         return totalExpense;
+    }
+
+    public void setTotalExpense(double totalExpense) {
+        this.totalExpense = totalExpense;
     }
 
     @Override

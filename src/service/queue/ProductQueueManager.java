@@ -1,5 +1,7 @@
 package service.queue;
 
+import io.ReadData;
+import io.WriteData;
 import model.product.ProductEXPLimited;
 import model.product.ProductEXPUnLimited;
 import model.sout.NotifyForm;
@@ -14,6 +16,19 @@ public class ProductQueueManager implements IProductQueueManager {
     @Serial
     private static final long serialVersionUID = 6529685098267757690L;
     private static List<ProductQueue> productQueueList = new ArrayList<>();
+    static ReadData<ProductQueue> loader = new ReadData<>();
+    WriteData<ProductQueue> saver = new WriteData<>();
+
+    public static void loadProduct(){
+        String path = "src/io/database/product_queue_save.txt";
+        List<ProductQueue> loadedList = loader.loadListData(path);
+        productQueueList.addAll(loadedList);
+        System.out.println("Product List imported!");
+    }
+    private void saveProduct(){
+        String path = "src/io/database/product_queue_save.txt";
+        saver.writeToSaveFile(productQueueList,path);
+    }
 
     public ProductQueueManager() {
     }
@@ -33,6 +48,7 @@ public class ProductQueueManager implements IProductQueueManager {
                 productQueueList.add(productQueue);
             }
         }
+        saveProduct();
     }
 
     public boolean isProductExisted(String productName) {
@@ -61,6 +77,7 @@ public class ProductQueueManager implements IProductQueueManager {
         } else {
             System.out.println("Product not found!");
         }
+        saveProduct();
     }
 
 
@@ -95,7 +112,7 @@ public class ProductQueueManager implements IProductQueueManager {
         } else {
             System.out.println("Product not found!");
         }
-
+        saveProduct();
     }
 
     @Override
@@ -149,5 +166,9 @@ public class ProductQueueManager implements IProductQueueManager {
     public void sortByName(){
         productQueueList.sort(Comparator.comparing(ProductQueue::getProductQueueName));
         display();
+    }
+    public void clearProductData(){
+        productQueueList.clear();
+        saveProduct();
     }
 }

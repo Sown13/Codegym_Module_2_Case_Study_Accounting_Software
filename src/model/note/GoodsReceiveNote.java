@@ -50,8 +50,6 @@ public class GoodsReceiveNote extends Note {
     @Override
     public String toString() {
         return "GoodsReceiveNote{" +
-                "productFactory=" + productFactory +
-                ", productQueueList=" + productQueueList +
                 ", noteId='" + noteId + '\'' +
                 ", userNameCreateNote='" + userNameCreateNote + '\'' +
                 ", reason='" + reason + '\'' +

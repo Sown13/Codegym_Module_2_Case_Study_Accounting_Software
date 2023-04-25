@@ -6,6 +6,7 @@ import model.user.Role;
 import model.user.User;
 import model.user.UserFactory;
 import service.note_manager.NoteManager;
+import service.queue.ProductQueue;
 import service.queue.ProductQueueManager;
 import service.user.UserManager;
 
@@ -38,6 +39,7 @@ public class Menu {
     public static void loadSave() {
         UserManager.loadUser();
         NoteManager.loadNoteList();
+        ProductQueueManager.loadProduct();
     }
 
     public static void startMenu() {
@@ -119,6 +121,7 @@ public class Menu {
                     | 1/ Product Manager              |
                     | 2/ Business Manager             |
                     | 3/ User Manager                 |
+                    | 4/ Reset Data <Warning>         |
                     | 0/ Log out                      |
                     -----------------------------------------------------------------------------------------------
                     """);
@@ -127,6 +130,21 @@ public class Menu {
                 case "1" -> Menu.productMenu();
                 case "2" -> Menu.businessMenu();
                 case "3" -> Menu.userMenu();
+                case "4" -> {
+                    System.out.println("Are you sure to reset the program? All saved file will be delete!");
+                    System.out.println("""
+                            1/ Yes
+                            0/ No
+                            """);
+                    choice = scanner.nextLine();
+                    if (choice.equals("1")) {
+                        productQueueManager.clearProductData();
+                        noteManager.resetNote();
+                        System.out.println("Data deleted");
+                    } else {
+                        System.out.println("Canceled!");
+                    }
+                }
                 case "0" -> Menu.startMenu();
             }
         }
@@ -216,6 +234,31 @@ public class Menu {
         while (menuCondition);
     }
 
+    public static void drawnBusinessTable(){
+        System.out.println("""
+                        Ket qua kinh doanh:
+                        """);
+        System.out.println("________________________________________________________________________");
+        System.out.println("""
+                        |                           Business Result                             |
+                        """);
+        System.out.println("________________________________________________________________________");
+        System.out.println("""                 
+                        | Order |            PRODUCT NAME              |  Sold   |   Benefit    |
+                        """);
+        int count = 0;
+        for (ProductQueue productQueue : ProductQueueManager.getProductQueueList()){
+            System.out.printf("""
+                            | %-+,7d |            %-10s              |  %-+,4d   |              |
+                            """,++count,productQueue.getProductQueueName(),productQueue.getSoldNumber());
+        }
+        System.out.printf("""
+                | Total Income:%+,57f|
+                """,businessCalculate.getTotalSellingAmount());
+        System.out.printf("""
+                | Total Benefit:%+,57f|
+                """,businessCalculate.getBusinessResult());
+    }
     public static void businessMenu() {
         menuCondition = true;
         do {
@@ -231,7 +274,7 @@ public class Menu {
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1" -> Menu.showNoteList();
-                case "2" -> businessCalculate.getBusinessResult();
+                case "2" -> Menu.drawnBusinessTable();
                 case "3" -> System.out.println("Function is in maintain, please comeback later~!");
                 case "0" -> Menu.backToRoleMenu();
             }
@@ -368,7 +411,7 @@ public class Menu {
             System.out.println("""
                     __________________________________
                     | 1/ Show product                 |
-                    | 2/ Create Delivery Note          |
+                    | 2/ Create Delivery Note         |
                     | 0/ Log out                      |
                     -----------------------------------------------------------------------------------------------
                     """);
@@ -398,7 +441,7 @@ public class Menu {
             switch (choice) {
                 case "1" -> Menu.showProductMenu();
                 case "2" -> Menu.showNoteList();
-                case "3" -> businessCalculate.getBusinessResult();
+                case "3" -> Menu.drawnBusinessTable();
                 case "0" -> Menu.startMenu();
             }
         }

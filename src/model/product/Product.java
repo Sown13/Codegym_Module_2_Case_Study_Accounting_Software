@@ -1,18 +1,19 @@
 package model.product;
 
 
+import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.PriorityQueue;
+
 
 public abstract class Product implements Serializable {
+    @Serial
     private static final long serialVersionUID = 6529685098267757690L;
     private static int hiddenSpecialValue = 10_000;
     protected String productId;
     protected String productName;
-    protected String productDetail;
-    protected Double productOriginalPrice;
-    protected Double productSellPrice;
+    protected String productDetail = "";
+    protected Double productOriginalPrice = 0d;
+    protected Double productSellPrice = 0d;
 
 
 
@@ -22,7 +23,7 @@ public abstract class Product implements Serializable {
         this.productName = productName;
     }
 
-    public Product(String productId, String productName, String productDetail, Double productOriginalPrice, Double productSellPrice, int productQuantity, LocalDate manufacturingDate) {
+    public Product(String productId, String productName, String productDetail, Double productOriginalPrice, Double productSellPrice) {
         this.productId = productId;
         this.productName = productName;
         this.productDetail = productDetail;

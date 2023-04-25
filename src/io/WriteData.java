@@ -1,11 +1,11 @@
 package io;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.List;
 
-public class WriteData<T> {
+public class WriteData<T> implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 6529685098267757690L;
     public void writeToSaveFile(List<T> exportList, String pathName){
         File saveFile = new File(pathName);
         try(FileOutputStream fileOutputStream = new FileOutputStream(saveFile);

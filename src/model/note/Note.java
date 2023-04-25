@@ -16,6 +16,7 @@ public abstract class Note implements Serializable {
     public Note(String productName, int quantity,String userNameCreateNote){
         this.productName = productName;
         this.quantity = quantity;
+        this.userNameCreateNote = userNameCreateNote;
     }
 
     public String getNoteId() {

@@ -2,15 +2,18 @@ package service.queue;
 
 import model.product.Product;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.LinkedList;
 
 
 public class ProductQueue implements Serializable {
+    @Serial
     private static final long serialVersionUID = 6529685098267757690L;
     private final Product representationProduct;
     private final String productQueueName;
     private int quantity = 0;
+    private int soldNumber = 0;
     private ProductStorageStatus storageStatus = ProductStorageStatus.OUT_OF_STOCK;
     private final LinkedList<Product> productQueue = new LinkedList<>();
 
@@ -42,11 +45,21 @@ public class ProductQueue implements Serializable {
         } else {
             for (int i = 0; i < quantity; i++) {
                 Product tempProduct = productQueue.poll();
+                assert tempProduct != null;
                 totalSellPrice += tempProduct.getProductSellPrice();
+                this.soldNumber++;
             }
             updateStorageStatus();
         }
         return totalSellPrice;
+    }
+
+    public int getSoldNumber() {
+        return soldNumber;
+    }
+
+    public void setSoldNumber(int soldNumber) {
+        this.soldNumber = soldNumber;
     }
 
     public String getProductQueueName() {

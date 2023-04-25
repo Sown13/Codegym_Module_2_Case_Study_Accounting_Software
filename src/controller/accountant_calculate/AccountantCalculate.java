@@ -5,6 +5,8 @@ import service.queue.ProductQueueManager;
 import model.note.GoodsDeliveryNote;
 import model.note.Note;
 
+import java.util.List;
+
 public class AccountantCalculate {
     NoteManager noteManager = new NoteManager();
     ProductQueueManager productQueueManager;
@@ -29,6 +31,7 @@ public class AccountantCalculate {
         }
         return totalSellingAmount;
     }
+
 
     public double getTotalCurrentStorageAmount() {
         return productQueueManager.getTotalCurrentOriginalPrice();
