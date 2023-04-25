@@ -63,4 +63,14 @@ public abstract class Note implements Serializable {
     public double getTotalAmount() {
         return totalAmount;
     }
+
+    @Override
+    public String toString() {
+        return "noteId='" + noteId + '\'' +
+                ", userNameCreateNote='" + userNameCreateNote + '\'' +
+                ", reason='" + reason + '\'' +
+                ", productName='" + productName + '\'' +
+                ", quantity=" + quantity +
+                ", totalAmount=" + totalAmount ;
+    }
 }

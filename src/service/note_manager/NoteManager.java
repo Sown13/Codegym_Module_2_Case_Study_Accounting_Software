@@ -32,8 +32,17 @@ public class NoteManager implements INoteManager{
         ReadData<Note> loader = new ReadData<>();
         List<Note> part1 = loader.loadListData("src/io/database/receive_note_save.txt");
         List<Note> part2 = loader.loadListData("src/io/database/delivery_note_save.txt");
-        part1.addAll((part1.size()),part2);
-        noteList = part1;
+        int tempSerial_1 = 10_000;
+        for (Note note : part1){
+            noteList.add(note);
+            GoodsReceiveNote.specialNoteValue = ++tempSerial_1;
+        }
+        int tempSerial_2 = 10_000;
+        for (Note note : part2){
+            noteList.add(note);
+            GoodsDeliveryNote.specialNoteValue = ++tempSerial_2;
+        }
+
     }
     @Override
     public void add(Note note) {

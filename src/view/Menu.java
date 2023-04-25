@@ -34,21 +34,23 @@ public class Menu {
         }
     }
 
-    private static void loadSave() {
+    public static void loadSave() {
         UserManager.loadUser();
         NoteManager.loadNoteList();
     }
 
     public static void startMenu() {
-        loadSave();
+        productQueueManager.display();
         menuCondition = true;
         currentRole = null;
         currentUser = null;
         currentUserFullName = null;
         do {
             System.out.println("""
-                    1/ Login                
-                    0/ Exit
+                    _______________________________________________________________________________________________
+                    | 1/ Login                        |   
+                    | 0/ Exit                         |
+                    ----------------------------------
                     """);
             String choice = scanner.nextLine();
             switch (choice) {
@@ -370,14 +372,14 @@ public class Menu {
             System.out.println("""
                     __________________________________
                     | 1/ Show product                 |
-                    | 2/ Create Receive Note          |
+                    | 2/ Create Delivery Note          |
                     | 0/ Log out                      |
                     -----------------------------------------------------------------------------------------------
                     """);
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1" -> Menu.showProductMenu();
-                case "2" -> noteFactory.creatNote("ReceiveNote", currentUser);
+                case "2" -> noteFactory.creatNote("DeliveryNote", currentUser);
                 case "0" -> Menu.startMenu();
             }
         }

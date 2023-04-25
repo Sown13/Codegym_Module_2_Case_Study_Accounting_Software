@@ -1,8 +1,10 @@
 package model.note;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class NoteFactory {
+public class NoteFactory implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
     public Note creatNote(String type, String userNameCreateNote){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the productName");

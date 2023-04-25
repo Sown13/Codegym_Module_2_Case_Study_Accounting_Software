@@ -4,6 +4,7 @@ package model.product;
 import java.time.LocalDate;
 
 public class ProductEXPLimited extends Product{
+    private static final long serialVersionUID = 6529685098267757690L;
     private int expiryPeriod;
 
     public ProductEXPLimited(String name) {

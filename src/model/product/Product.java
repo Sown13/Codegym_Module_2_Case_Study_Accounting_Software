@@ -6,16 +6,14 @@ import java.time.LocalDate;
 import java.util.PriorityQueue;
 
 public abstract class Product implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
     private static int hiddenSpecialValue = 10_000;
     protected String productId;
     protected String productName;
     protected String productDetail;
     protected Double productOriginalPrice;
     protected Double productSellPrice;
-//    protected int productQuantity;
-//    protected PriorityQueue<Product> productQueue = new PriorityQueue<>();
 
-//    protected LocalDate manufacturingDate;
 
 
     public Product(String productName) {
@@ -30,11 +28,6 @@ public abstract class Product implements Serializable {
         this.productDetail = productDetail;
         this.productOriginalPrice = productOriginalPrice;
         this.productSellPrice = productSellPrice;
-//        this.productQuantity = productQuantity;
-//        for(int i =0; i< productQuantity;i++) {
-//            this.productQueue.poll();
-//        }
-//        this.manufacturingDate = manufacturingDate;
     }
 
     public String getProductId() {
@@ -69,22 +62,6 @@ public abstract class Product implements Serializable {
         this.productSellPrice = productSellPrice;
     }
 
-//    public int getProductQuantity() {
-//        this.productQuantity = this.productQueue.size();
-//        return productQuantity;
-//    }
-//
-//    public void setProductQuantity(int productQuantity) {
-//        this.productQuantity = productQuantity;
-//    }
-
-//    public LocalDate getManufacturingDate() {
-//        return manufacturingDate;
-//    }
-//
-//    public void setManufacturingDate(LocalDate manufacturingDate) {
-//        this.manufacturingDate = manufacturingDate;
-//    }
 
     public String getProductDetail() {
         return productDetail;
@@ -94,9 +71,6 @@ public abstract class Product implements Serializable {
         this.productDetail = productDetail;
     }
 
-//    public PriorityQueue<Product> getProductQueue() {
-//        return productQueue;
-//    }
     @Override
     public String toString() {
         return "productId: '" + productId + '\'' +
@@ -104,7 +78,5 @@ public abstract class Product implements Serializable {
                 ", productOriginalPrice: " + productOriginalPrice +
                 ", productSellPrice: " + productSellPrice +
                 ", productDetail: " + productDetail;
-//              +  ", productQuantity=" + productQuantity +
-//                ", manufacturingDate=" + manufacturingDate;
     }
 }

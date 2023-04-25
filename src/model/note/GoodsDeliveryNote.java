@@ -10,7 +10,7 @@ import model.product.Product;
 //Phiếu xuất kho, sẽ cần lưu lại sau mỗi lần lập;
 public class GoodsDeliveryNote extends Note {
     private static final long serialVersionUID = 6529685098267757690L;
-    private static int specialNoteValue = 10_000;
+    public static int specialNoteValue = 10_000;
     private Product productDelivery;
     private double totalExpense;
 
@@ -43,12 +43,12 @@ public class GoodsDeliveryNote extends Note {
         return "GoodsDeliveryNote{" +
                 "productDelivery=" + productDelivery +
                 ", totalExpense=" + totalExpense +
-                ", noteId='" + noteId + '\'' +
-                ", userNameCreateNote='" + userNameCreateNote + '\'' +
-                ", reason='" + reason + '\'' +
-                ", productName='" + productName + '\'' +
-                ", quantity=" + quantity +
-                ", totalAmount=" + totalAmount +
+                ", noteId='" + super.noteId + '\'' +
+                ", userNameCreateNote='" + super.userNameCreateNote + '\'' +
+                ", reason='" + super.reason + '\'' +
+                ", productName='" + super.productName + '\'' +
+                ", quantity=" + super.quantity +
+                ", totalAmount=" + super.totalAmount +
                 '}'+ "\n";
     }
 }

@@ -12,9 +12,9 @@ import java.util.Scanner;
 public class GoodsReceiveNote extends Note {
     private static final long serialVersionUID = 6529685098267757690L;
     ProductFactory productFactory = new ProductFactory();
-    ProductQueueManager productQueueList = new ProductQueueManager();
+    static ProductQueueManager productQueueList = new ProductQueueManager();
 
-    private static int specialNoteValue = 10_000;
+    public static int specialNoteValue = 10_000;
 
     public GoodsReceiveNote(String productName, int quantity,String userNameCreateNote) {
        super(productName,quantity,userNameCreateNote);
@@ -40,6 +40,7 @@ public class GoodsReceiveNote extends Note {
         double sellPrice = Double.parseDouble(scanner.nextLine());
         tempProduct.setProductSellPrice(sellPrice);
         productQueueList.add(new ProductQueue(quantity,tempProduct));
+        productQueueList.display();
         NoteManager noteManager = new NoteManager();
         this.totalAmount = tempProduct.getProductOriginalPrice() * quantity;
         noteManager.add(this);

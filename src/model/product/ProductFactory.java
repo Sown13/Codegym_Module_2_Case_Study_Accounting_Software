@@ -1,8 +1,10 @@
 package model.product;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class ProductFactory {
+public class ProductFactory implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
 
     public Product makeProduct(String choice, String name){
         Scanner scanner = new Scanner(System.in);
