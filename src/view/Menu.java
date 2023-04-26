@@ -249,7 +249,7 @@ public class Menu {
         int count = 0;
         for (ProductQueue productQueue : ProductQueueManager.getProductQueueList()){
             System.out.printf("""
-                            | %-,5d |      %-1s           | %-+,4d    | %+-,1f|
+                            | %-,5d |      %-1s           | %-+,4d    |-%-,1f|
                             """,++count,productQueue.getProductQueueName(),productQueue.getSoldNumber(),productQueue.getTotalOriginalPrice());
         }
         System.out.println("________________________________________________________________________");

@@ -5,60 +5,80 @@ import io.WriteData;
 import model.note.GoodsDeliveryNote;
 import model.note.GoodsReceiveNote;
 import model.note.Note;
+import model.note.NoteFactory;
+import model.product.Product;
+import model.product.ProductEXPLimited;
+import service.queue.ProductQueue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
 
-public class NoteManager implements INoteManager{
+public class NoteManager implements INoteManager {
     private static List<Note> noteList = new ArrayList<>();
 
+    private static NoteFactory noteFactory = new NoteFactory();
 
     public void saveDataReceiveNote() {
         WriteData<Note> saver = new WriteData<>();
         String path = "src/io/database/receive_note_save.txt";
         List<Note> receiveNoteList = getReceiveNote();
-        saver.writeToSaveFile(receiveNoteList,path);
+        saver.writeToSaveFile(receiveNoteList, path);
     }
-    public void saveDataDeliveryNote(){
+
+    public void saveDataDeliveryNote() {
         WriteData<Note> saver = new WriteData<>();
         String path = "src/io/database/delivery_note_save.txt";
         List<Note> deliveryNoteList = getDeliveryNote();
-        saver.writeToSaveFile(deliveryNoteList,path);
+        saver.writeToSaveFile(deliveryNoteList, path);
     }
-    public void saveNote(){
+
+    public void saveNote() {
         saveDataReceiveNote();
         saveDataDeliveryNote();
     }
-    public static void loadNoteList(){
+
+    public static void loadNoteList() {
         ReadData<Note> loader = new ReadData<>();
         List<Note> part1 = loader.loadListData("src/io/database/receive_note_save.txt");
         List<Note> part2 = loader.loadListData("src/io/database/delivery_note_save.txt");
-        int tempSerial_1 = 10_000;
-        for (Note note : part1){
-            noteList.add(note);
-            GoodsReceiveNote.specialNoteValue = ++tempSerial_1;
+        for (Note note : part1) {
+            if (((GoodsReceiveNote) note).getThisQueueOfNoteFromQueue() != null) {
+                Note tempNote = noteFactory.createNoteAuto("ReceiveNote", note.getProductName(), note.getQuantity(), note.getUserNameCreateNote()
+                        , ((GoodsReceiveNote) note).getThisQueueOfNoteFromQueue()
+                        , ((GoodsReceiveNote) note).getThisQueueOfNoteFromQueue().getTotalOriginalPrice()
+                        , ((GoodsReceiveNote) note).getThisQueueOfNoteFromQueue().getRepresentationProduct().getProductSellPrice());
+                noteList.add(tempNote);
+            } else {
+                noteList.add(note);
+            }
         }
-        int tempSerial_2 = 10_000;
-        for (Note note : part2){
+        Product uselessProduct = new ProductEXPLimited("useless");
+        ProductQueue uselessQueue = new ProductQueue(0, uselessProduct);
+        for (Note note : part2) {
+            Note tempNote = noteFactory.createNoteAuto("DeliveryNote", note.getProductName(), note.getQuantity(), note.getUserNameCreateNote(), uselessQueue, 0d, 0d);
             noteList.add(note);
-            GoodsDeliveryNote.specialNoteValue = ++tempSerial_2;
         }
         System.out.println("Note imported!");
     }
+
     @Override
     public void add(Note note) {
         noteList.add(note);
         saveNote();
     }
 
-    public boolean isNoteExisted(String noteId){
+    public boolean isNoteExisted(String noteId) {
         return noteList.stream().anyMatch(note -> note.getNoteId().equals(noteId));
     }
+
     @Override
     public void remove() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Remove by id - Please enter the NoteID");
         String noteId = scanner.nextLine();
-        if(isNoteExisted(noteId)){
+        if (isNoteExisted(noteId)) {
             System.out.println("Are you sure to remove this Note?" + "noteID: " + noteId);
             System.out.println("""
                     1/ Yes, remove it!
@@ -82,7 +102,7 @@ public class NoteManager implements INoteManager{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Remove by id - Please enter the NoteID");
         String noteId = scanner.nextLine();
-        if(isNoteExisted(noteId)){
+        if (isNoteExisted(noteId)) {
             Note noteEdit = noteList
                     .stream()
                     .filter(note -> note.getNoteId().equals(noteId)).findFirst()
@@ -111,12 +131,13 @@ public class NoteManager implements INoteManager{
     @Override
     public void display() {
         int order = 0;
-        for (Note note : noteList){
+        for (Note note : noteList) {
             System.out.println(++order + " - " + note);
         }
     }
+
     @Override
-    public List<Note> getReceiveNote(){
+    public List<Note> getReceiveNote() {
         List<Note> receiveNoteList = noteList
                 .stream()
                 .filter(note -> note instanceof GoodsReceiveNote)
@@ -124,8 +145,9 @@ public class NoteManager implements INoteManager{
 //        System.out.println(receiveNoteList);
         return receiveNoteList;
     }
+
     @Override
-    public List<Note> getDeliveryNote(){
+    public List<Note> getDeliveryNote() {
         List<Note> deliveryNoteList = noteList
                 .stream()
                 .filter(note -> note instanceof GoodsDeliveryNote)
@@ -133,18 +155,22 @@ public class NoteManager implements INoteManager{
 //        System.out.println(deliveryNoteList);
         return deliveryNoteList;
     }
+
     @Override
-    public void resetNote(){
+    public void resetNote() {
         noteList.clear();
         saveNote();
     }
-    public List<Note> getNoteList(){
+
+    public List<Note> getNoteList() {
         return noteList;
     }
-    public void sortNoteList(){
+
+    public void sortNoteList() {
         noteList.sort(Comparator.comparing(Note::getNoteId));
     }
-    public void seachNote(){
+
+    public void seachNote() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter keyword");
         String keyWord = scanner.nextLine();
@@ -155,7 +181,7 @@ public class NoteManager implements INoteManager{
                 .toList());
         resultList.sort(Comparator.comparing(Note::getNoteId));
         int order = 0;
-        for (Note note : resultList){
+        for (Note note : resultList) {
             System.out.println(++order + " - " + note);
         }
     }

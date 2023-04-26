@@ -2,10 +2,10 @@ package model.note;
 
 //import model.product.ProductFactory;
 
+import model.product.Product;
 import service.note_manager.NoteManager;
 import service.queue.ProductQueue;
 import service.queue.ProductQueueManager;
-import model.product.Product;
 
 import java.io.Serial;
 
@@ -15,22 +15,33 @@ public class GoodsDeliveryNote extends Note {
     private static final long serialVersionUID = 6529685098267757690L;
     public static int specialNoteValue = 10_000;
     private Product productDelivery;
-    private double totalExpense;
+    private double totalExpense = 0;
 
-    public GoodsDeliveryNote(String productName, int quantity,String userNameCreateNote) {
-        super(productName, quantity,userNameCreateNote);
+    public GoodsDeliveryNote(String productName, int quantity, String userNameCreateNote) {
+        super(productName, quantity, userNameCreateNote);
         specialNoteValue++;
-        this.noteId = "DeliverNote.No" + specialNoteValue;
-        for (ProductQueue productQueue : ProductQueueManager.getProductQueueList()) {
-            if (productQueue.getProductQueueName().equals(productName)) {
-                this.productDelivery = productQueue.getRepresentationProduct();
-                this.totalAmount = productQueue.decreaseQuantity(quantity);
-                setTotalExpense(productQueue.getTotalOriginalPrice());
-                break;
+        NoteManager noteManager = new NoteManager();
+        if (isProductExisted(productName)) {
+            for (ProductQueue productQueue : ProductQueueManager.getProductQueueList()) {
+                if (productQueue.getProductQueueName().equals(productName)) {
+                    this.productDelivery = productQueue.getRepresentationProduct();
+                    this.totalAmount = productQueue.decreaseQuantity(quantity);
+                    setTotalExpense(productQueue.getTotalOriginalPrice());
+                    this.noteId = "DeliverNote.No" + specialNoteValue;
+                    noteManager.add(this);
+                    break;
+                }
             }
         }
-        NoteManager noteManager = new NoteManager();
-        noteManager.add(this);
+    }
+    public GoodsDeliveryNote(String productName, int quantity,String userNameCreateNote,ProductQueue productType,double originalPrice, double sellPrice){
+    }
+
+    public boolean isProductExisted(String productName) {
+        return ProductQueueManager
+                .getProductQueueList()
+                .stream()
+                .anyMatch(productQueue -> productQueue.getProductQueueName().equals(productName));
     }
 
     public Product getProductDelivery() {
@@ -56,6 +67,6 @@ public class GoodsDeliveryNote extends Note {
                 ", productName='" + super.productName + '\'' +
                 ", quantity=" + super.quantity +
                 ", totalAmount=" + super.totalAmount +
-                '}'+ "\n";
+                '}' + "\n";
     }
 }

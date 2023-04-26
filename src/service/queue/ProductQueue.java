@@ -18,6 +18,7 @@ public class ProductQueue implements Serializable {
     private final LinkedList<Product> productQueue = new LinkedList<>();
 
 
+
     public ProductQueue(int quantity, Product product) {
         this.representationProduct = product;
         if (quantity > 0) {
@@ -56,6 +57,9 @@ public class ProductQueue implements Serializable {
 
     public int getSoldNumber() {
         return soldNumber;
+    }
+    public void updateSoldNumber(){
+
     }
 
     public void setSoldNumber(int soldNumber) {
@@ -110,7 +114,7 @@ public class ProductQueue implements Serializable {
 
     public double getTotalOriginalPrice(){
         double totalOriginalPrice = 0;
-        for (Product product : productQueue){
+        for (Product product : this.productQueue){
             totalOriginalPrice += product.getProductOriginalPrice();
         }
         return totalOriginalPrice;

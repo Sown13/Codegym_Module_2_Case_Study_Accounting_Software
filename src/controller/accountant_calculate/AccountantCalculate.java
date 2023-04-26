@@ -1,11 +1,14 @@
 package controller.accountant_calculate;
 
 import service.note_manager.NoteManager;
+import service.queue.ProductQueue;
 import service.queue.ProductQueueManager;
 import model.note.GoodsDeliveryNote;
 import model.note.Note;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AccountantCalculate {
     NoteManager noteManager = new NoteManager();
@@ -32,6 +35,13 @@ public class AccountantCalculate {
         return totalSellingAmount;
     }
 
+    public Map<String, Integer> getMapOfProductAndSoldQuantity(){
+        Map<String, Integer> mapNameAndSoldProduct = new HashMap<>();
+        for (Note note : noteManager.getDeliveryNote()){
+            mapNameAndSoldProduct.put(note.getProductName(), note.getQuantity());
+        }
+        return mapNameAndSoldProduct;
+    }
 
     public double getTotalCurrentStorageAmount() {
         return productQueueManager.getTotalCurrentOriginalPrice();

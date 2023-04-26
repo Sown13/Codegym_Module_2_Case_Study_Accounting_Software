@@ -1,5 +1,7 @@
 package model.note;
 
+import service.queue.ProductQueue;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Scanner;
@@ -22,6 +24,20 @@ public class NoteFactory implements Serializable {
         switch (type) {
             case "ReceiveNote" -> {
                 return new GoodsReceiveNote(productName, quantity, userNameCreateNote);
+            }
+            case "DeliveryNote" -> {
+                return new GoodsDeliveryNote(productName, quantity, userNameCreateNote);
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
+
+    public Note createNoteAuto(String type, String productName, int quantity, String userNameCreateNote, ProductQueue productType, double originalPrice, double sellPrice){
+        switch (type) {
+            case "ReceiveNote" -> {
+                return new GoodsReceiveNote(productName, quantity, userNameCreateNote,productType,originalPrice,sellPrice);
             }
             case "DeliveryNote" -> {
                 return new GoodsDeliveryNote(productName, quantity, userNameCreateNote);

@@ -1,5 +1,6 @@
 package model.note;
 
+import model.product.ProductEXPLimited;
 import service.note_manager.NoteManager;
 import service.queue.ProductQueue;
 import service.queue.ProductQueueManager;
@@ -14,7 +15,7 @@ public class GoodsReceiveNote extends Note {
     @Serial
     private static final long serialVersionUID = 6529685098267757690L;
     ProductFactory productFactory = new ProductFactory();
-    static ProductQueueManager productQueueList = new ProductQueueManager();
+    public static ProductQueueManager productQueueList = new ProductQueueManager();
 
     public static int specialNoteValue = 10_000;
 
@@ -45,6 +46,32 @@ public class GoodsReceiveNote extends Note {
         NoteManager noteManager = new NoteManager();
         this.totalAmount = tempProduct.getProductOriginalPrice() * quantity;
         noteManager.add(this);
+    }
+    public GoodsReceiveNote(String productName, int quantity,String userNameCreateNote,ProductQueue productType,double originalPrice, double sellPrice){
+        super(productName,quantity,userNameCreateNote);
+        specialNoteValue++;
+        this.noteId = "ReceiverNote.No" + specialNoteValue;
+        Product tempProduct;
+        if (productType.getRepresentationProduct() instanceof ProductEXPLimited) {
+            tempProduct = productFactory.makeProduct("limited", productName);
+        } else {
+            tempProduct = productFactory.makeProduct("unlimited", productName);
+        }
+        tempProduct.setProductOriginalPrice(originalPrice);
+        tempProduct.setProductSellPrice(sellPrice);
+        productQueueList.add(new ProductQueue(quantity,tempProduct));
+        NoteManager noteManager = new NoteManager();
+        this.totalAmount = tempProduct.getProductOriginalPrice() * quantity;
+        noteManager.add(this);
+
+    }
+    public ProductQueue getThisQueueOfNoteFromQueue(){
+        for (ProductQueue tempQueue : ProductQueueManager.getProductQueueList()){
+            if(tempQueue.getProductQueueName().equals(this.productName)){
+                return tempQueue;
+            }
+        }
+        return null;
     }
 
     @Override
