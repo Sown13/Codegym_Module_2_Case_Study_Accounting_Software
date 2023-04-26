@@ -244,19 +244,20 @@ public class Menu {
                         """);
         System.out.println("________________________________________________________________________");
         System.out.println("""                 
-                        | Order |            PRODUCT NAME              |  Sold   |   Benefit    |
+                        | Order |            PRODUCT NAME              |  Sold   |Original Price|
                         """);
         int count = 0;
         for (ProductQueue productQueue : ProductQueueManager.getProductQueueList()){
             System.out.printf("""
-                            | %-+,7d |            %-10s              |  %-+,4d   |              |
-                            """,++count,productQueue.getProductQueueName(),productQueue.getSoldNumber());
+                            | %-,5d |      %-1s           | %-+,4d    | %+-,1f|
+                            """,++count,productQueue.getProductQueueName(),productQueue.getSoldNumber(),productQueue.getTotalOriginalPrice());
         }
+        System.out.println("________________________________________________________________________");
         System.out.printf("""
                 | Total Income:%+,57f|
                 """,businessCalculate.getTotalSellingAmount());
         System.out.printf("""
-                | Total Benefit:%+,57f|
+                | Total Benefit:%+,56f|
                 """,businessCalculate.getBusinessResult());
     }
     public static void businessMenu() {
